@@ -62,7 +62,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\delegateCommand.cs" />
+    <Compile Include="Models\Block.cs" />
     <Compile Include="Models\Hacksaw.cs" />
+    <Compile Include="ViewModels\ControlWindowVM.cs" />
     <Compile Include="Views\ControlWindow.xaml.cs">
       <DependentUpon>ControlWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -94,9 +97,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

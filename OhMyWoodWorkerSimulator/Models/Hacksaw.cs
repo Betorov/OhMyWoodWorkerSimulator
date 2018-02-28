@@ -10,12 +10,14 @@ namespace OhMyWoodWorkerSimulator.Models
     {
         private float x0 = 0;
         private float y0 = 0;
+        private float xCurrent = 0;
+        private float yCurrent = 0;
         private float xEnd = 0;
         private float yEnd = 0;
         private float width = 0;
         private float lengthStep = 0;
 
-        public Hacksaw(int kX0,int kY0,int kXEnd,int kYEnd,int kWidth,int kLegthStep)
+        public Hacksaw(float kX0, float kY0, float kXEnd, float kYEnd, float kWidth, float kLegthStep)
         {
             X0 = kX0;
             Y0 = kY0;
@@ -48,5 +50,13 @@ namespace OhMyWoodWorkerSimulator.Models
         /// Длина шага рубанка
         /// </summary>
         public float LengthStep { get => lengthStep; set => lengthStep = value; }
+        /// <summary>
+        /// Текущая координаты рубанка по оси X
+        /// </summary>
+        public float XCurrent { get => xCurrent; set => xCurrent = value; }
+        /// <summary>
+        /// Текущая координаты рубанка по оси Y
+        /// </summary>
+        public float YCurrent { get => yCurrent; set => yCurrent = value; }
     }
 }
