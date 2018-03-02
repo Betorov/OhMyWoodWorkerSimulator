@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteControl", "OhMyWoodWorkerSimulator\RemoteControl.csproj", "{9B35D4DF-992E-4239-8373-D73948D52C1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strogach", "..\ВКР\OhMyWoodWorkerSimulator\Strogach\Strogach.csproj", "{566C26FC-A0B5-4746-94DD-AEF572117F09}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strogach", "Strogach\Strogach.csproj", "{8854EB88-A40E-438D-934D-20B4211868D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeChannel", "..\ВКР\OhMyWoodWorkerSimulator\ExchangeChannel\ExchangeChannel.csproj", "{E9AD7853-69D3-4287-97AB-E38F4424A32D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeChannel", "ExchangeChannel\ExchangeChannel.csproj", "{E319F48B-88E9-4C81-ABAA-3FDF5EB15793}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{9B35D4DF-992E-4239-8373-D73948D52C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B35D4DF-992E-4239-8373-D73948D52C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B35D4DF-992E-4239-8373-D73948D52C1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{566C26FC-A0B5-4746-94DD-AEF572117F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{566C26FC-A0B5-4746-94DD-AEF572117F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{566C26FC-A0B5-4746-94DD-AEF572117F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{566C26FC-A0B5-4746-94DD-AEF572117F09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9AD7853-69D3-4287-97AB-E38F4424A32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9AD7853-69D3-4287-97AB-E38F4424A32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9AD7853-69D3-4287-97AB-E38F4424A32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9AD7853-69D3-4287-97AB-E38F4424A32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8854EB88-A40E-438D-934D-20B4211868D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8854EB88-A40E-438D-934D-20B4211868D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8854EB88-A40E-438D-934D-20B4211868D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8854EB88-A40E-438D-934D-20B4211868D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E319F48B-88E9-4C81-ABAA-3FDF5EB15793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E319F48B-88E9-4C81-ABAA-3FDF5EB15793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E319F48B-88E9-4C81-ABAA-3FDF5EB15793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E319F48B-88E9-4C81-ABAA-3FDF5EB15793}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
