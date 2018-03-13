@@ -8,8 +8,8 @@ namespace OhMyWoodWorkerSimulator.Models
 {
     class Block
     {
-        private float width = 0;
-        private float length = 0;
+        private float _width = 0;
+        private float _length = 0;
         public Block(float kWidth,float kLenth)
         {
             Width = kWidth;
@@ -18,10 +18,10 @@ namespace OhMyWoodWorkerSimulator.Models
         /// <summary>
         /// Щирина бруска
         /// </summary>
-        public float Width { get => width; set => width = value; }
+        public float Width { get => _width; set => _width = value; }
         /// <summary>
         /// Длина бруска
         /// </summary>
-        public float Length { get => length; set => length = value; }
+        public float Length { get => _length; set => _length = value; }
     }
 }
