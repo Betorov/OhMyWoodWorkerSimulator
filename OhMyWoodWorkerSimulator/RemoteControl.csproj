@@ -68,6 +68,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Brick.cs" />
+    <Compile Include="Network\ECommands.cs" />
+    <Compile Include="Network\EDirection.cs" />
+    <Compile Include="Network\EErrors.cs" />
+    <Compile Include="Network\Exchanger.cs" />
+    <Compile Include="Network\Frame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
