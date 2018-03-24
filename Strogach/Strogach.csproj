@@ -84,6 +84,13 @@
   <ItemGroup>
     <Compile Include="DataContext.cs" />
     <Compile Include="IScene.cs" />
+    <Compile Include="Context\ExchangeContext.cs" />
+    <Compile Include="Network\StrogachChannel.cs" />
+    <Compile Include="Network\ECommands.cs" />
+    <Compile Include="Network\EDirection.cs" />
+    <Compile Include="Network\EErrors.cs" />
+    <Compile Include="Network\Exchanger.cs" />
+    <Compile Include="Network\Frame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs" />
