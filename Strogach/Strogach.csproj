@@ -73,6 +73,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,8 +82,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContext.cs" />
+    <Compile Include="IScene.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -92,6 +96,10 @@
     <ProjectReference Include="..\ExchangeChannel\ExchangeChannel.csproj">
       <Project>{e319f48b-88e9-4c81-abaa-3fdf5eb15793}</Project>
       <Name>ExchangeChannel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpHelper\SharpDxHelper.csproj">
+      <Project>{ea6f422e-3d4f-499f-a76f-3dc366489387}</Project>
+      <Name>SharpDxHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
