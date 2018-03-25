@@ -73,6 +73,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -82,7 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContext.cs" />
+    <Compile Include="Context\DataContext.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="Context\ExchangeContext.cs" />
     <Compile Include="Network\StrogachChannel.cs" />
@@ -91,12 +92,21 @@
     <Compile Include="Network\EErrors.cs" />
     <Compile Include="Network\Exchanger.cs" />
     <Compile Include="Network\Frame.cs" />
+    <Compile Include="ObjectFigures\IModels.cs" />
+    <Compile Include="ObjectFigures\Table.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Scene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ModelsResources\Wooden Table 1.obj" />
+    <None Include="ModelsResources\Wooden_Table_1.mtl" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +118,17 @@
       <Project>{ea6f422e-3d4f-499f-a76f-3dc366489387}</Project>
       <Name>SharpDxHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ModelsResources\objPlusImage.hlsl" />
+    <Content Include="ModelsResources\Wooden_Table_1_default.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

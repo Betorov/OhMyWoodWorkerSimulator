@@ -11,11 +11,21 @@ namespace Strogach.Network
 {
     public class StrogachChannel : Channel
     {
+        public StrogachChannel()
+        {
+            //Client
+        }
+
         public byte[] Data
         {
             get;
             private set;
         }
+
+        public int ChannelPriority => throw new NotImplementedException();
+
+        public string ChannelName => throw new NotImplementedException();
+
         public void RunListenerTask()
         {
             MemoryStream requestStream = new MemoryStream();
@@ -47,6 +57,11 @@ namespace Strogach.Network
                 new Task(
                     new Action(
                         () => RunListenerTask()));
+        }
+
+        public string Parse(string url, out string objectURI)
+        {
+            throw new NotImplementedException();
         }
     }
 }

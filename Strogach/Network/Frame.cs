@@ -13,7 +13,7 @@ namespace Strogach.Network
         public byte[] Data { get; private set; }
         public void FillSelfFromRequest(byte[] request)
         {
-            _command = (ECommands)request[0];
+            Command = (ECommands)request[0];
 
             Data = 
                 new byte[request.Length - 1];
