@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DataContext.cs" />
+    <Compile Include="Context\GenECommands.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="Context\ExchangeContext.cs" />
     <Compile Include="Network\StrogachChannel.cs" />
