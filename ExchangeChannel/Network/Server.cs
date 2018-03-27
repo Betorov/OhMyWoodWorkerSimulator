@@ -108,19 +108,12 @@ namespace ExchangeChannel.Network
             Client receiver = sender.BoundedClient;
 
             Console.WriteLine("Пересылка: ");
-<<<<<<< HEAD
-            foreach (var datum in message)
-            {
-                Console.Write(
-                    "0x" +
-                    datum.ToString("X") +
-=======
+
             foreach(var datum in message)
             {
                 Console.Write(
                     "0x" +
                     datum.ToString("X") + 
->>>>>>> 13413f1bf3c040c4edca1a35f4f4e74ce9293d89
                     " ");
             }
             Console.WriteLine();

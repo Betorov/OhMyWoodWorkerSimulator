@@ -26,15 +26,11 @@ namespace Strogach.Network
             get;
             private set;
         }
-<<<<<<< HEAD:Strogach/Network/StrogachCHannel.cs
 
         //
         // Публичные методы.
         //
-=======
         
->>>>>>> 13413f1bf3c040c4edca1a35f4f4e74ce9293d89:Strogach/Network/StrogachChannel.cs
-
         /// <summary>
         /// Подключение к серверу.
         /// </summary>
@@ -52,14 +48,11 @@ namespace Strogach.Network
                         () => RunListenerTask()));
         }
 
-<<<<<<< HEAD:Strogach/Network/StrogachCHannel.cs
         //
         // Приватные методы.
         //
 
         // Слушатель входящих от пульта сообщений.
-=======
->>>>>>> 13413f1bf3c040c4edca1a35f4f4e74ce9293d89:Strogach/Network/StrogachChannel.cs
         private void RunListenerTask()
         {
             Data = new byte[64];

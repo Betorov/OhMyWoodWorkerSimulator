@@ -90,19 +90,7 @@ namespace ExchangeChannel.Network
         /// <returns>Байтовые данные.</returns>
         public byte[] Read()
         {
-<<<<<<< HEAD
-            byte[] data = new byte[64];
 
-            do
-            {
-                _stream.Read(
-                    data,
-                    0,
-                    data.Length);
-            }
-            while (_stream.DataAvailable);
-
-=======
              byte[] data = new byte[64];
 
             do
@@ -114,7 +102,6 @@ namespace ExchangeChannel.Network
             }
             while (_stream.DataAvailable);
 
->>>>>>> 13413f1bf3c040c4edca1a35f4f4e74ce9293d89
             return data;
         }
     }
