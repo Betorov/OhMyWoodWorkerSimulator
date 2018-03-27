@@ -84,19 +84,15 @@ namespace ExchangeChannel.Network
         /// Чтение данных, записанных в поток.
         /// </summary>
         /// <returns>Байтовые данные.</returns>
-        public byte[] Read()
+        public byte[] Read(int answerLength)
         {
 
-             byte[] data = new byte[64];
+            byte[] data = new byte[64];
 
-            do
-            {
-                _stream.Read(
-                    data,
-                    0,
-                    data.Length);
-            }
-            while (_stream.DataAvailable);
+            _stream.Read(
+                data,
+                0,
+                answerLength);
 
             return data;
         }

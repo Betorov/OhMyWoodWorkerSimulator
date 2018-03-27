@@ -45,7 +45,7 @@ namespace OhMyWoodWorkerSimulator.Network
             _exchangeChannel.Write(new[] { request });
 
             byte[] answer =
-                _exchangeChannel.Read();
+                _exchangeChannel.Read(1);
 
             frame.ValidateAnswerAndFillSelf(answer);
         }
@@ -60,7 +60,7 @@ namespace OhMyWoodWorkerSimulator.Network
             _exchangeChannel.Write(new[] { request });
 
             byte[] answer =
-                _exchangeChannel.Read();
+                _exchangeChannel.Read(17);
 
             frame.ValidateAnswerAndFillSelf(answer);
 
@@ -108,7 +108,7 @@ namespace OhMyWoodWorkerSimulator.Network
             _exchangeChannel.Write(request);
 
             byte[] answer =
-                _exchangeChannel.Read();
+                _exchangeChannel.Read(1);
 
             frame.ValidateAnswerAndFillSelf(answer);
         }
@@ -136,7 +136,7 @@ namespace OhMyWoodWorkerSimulator.Network
                 request);
 
             byte[] answer =
-                _exchangeChannel.Read();
+                _exchangeChannel.Read(1);
 
             frame.ValidateAnswerAndFillSelf(answer);
         }
