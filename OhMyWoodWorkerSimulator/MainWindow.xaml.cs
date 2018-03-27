@@ -1,6 +1,9 @@
-﻿using System;
+﻿using OhMyWoodWorkerSimulator.Network;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +26,12 @@ namespace OhMyWoodWorkerSimulator
         public MainWindow()
         {
             InitializeComponent();
+
+            var exchangeChannel = new ExchangeChannel.Network.Channel();
+
+            IPAddress iPAddress = IPAddress.Parse("127.0.0.1");
+
+            exchangeChannel.ConnectToServer(IPAddress.Parse("89.179.187.119"), 25565);
         }
     }
 }
