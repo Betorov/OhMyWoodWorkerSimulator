@@ -9,14 +9,34 @@ using System.Threading.Tasks;
 
 namespace OhMyWoodWorkerSimulator.Network
 {
+    /// <summary>
+    /// Основной класс для общения.
+    /// </summary>
     public class Exchanger
     {
+        //
+        // Приватные переменные.
+        //
+
+        // Канал для обмена данными со строгальным станком.
         private Channel _exchangeChannel;
+
+        //
+        // Конструкторы.
+        //
+
         public Exchanger(Channel exchangeChannel)
         {
             _exchangeChannel = exchangeChannel;
         }
 
+        //
+        // Публичные методы.
+        //
+
+        /// <summary>
+        /// Послать запрос на "рукопожатие".
+        /// </summary>
         public void SendHandshakeRequestAsync()
         {
             Frame frame = new Frame();
@@ -24,28 +44,31 @@ namespace OhMyWoodWorkerSimulator.Network
 
             _exchangeChannel.Write(new[] { request });
 
-            byte[] answer = 
+            byte[] answer =
                 _exchangeChannel.Read();
 
             frame.ValidateAnswerAndFillSelf(answer);
         }
 
+        /// <summary>
+        /// Запрашивает параметры бруска, с которыми в дальнейшем будет работать пульт управления.
+        /// </summary>
         public Brick GetBrickParams()
         {
             Frame frame = new Frame();
             byte request = frame.GetBrickParamsRequest();
             _exchangeChannel.Write(new[] { request });
 
-            byte[] answer = 
+            byte[] answer =
                 _exchangeChannel.Read();
 
             frame.ValidateAnswerAndFillSelf(answer);
 
-            float[] parameters = 
+            float[] parameters =
                 GetBrickParamsFromAnswer(
                     frame.Data);
 
-            Brick brick = 
+            Brick brick =
                 new Brick
                 {
                     X = parameters[0],
@@ -57,6 +80,14 @@ namespace OhMyWoodWorkerSimulator.Network
             return brick;
         }
 
+        /// <summary>
+        /// Запрашивает автоматическую резку ножом бруска.
+        /// </summary>
+        /// <param name="startPointX">Начальная координата X</param>
+        /// <param name="startPointY">Начальная координата Y</param>
+        /// <param name="endPointX">Конечная координата X</param>
+        /// <param name="endPointY">Конечная координата Y</param>
+        /// <param name="widht">Ширина ножа, который будет вытачивать брусок.</param>
         public void SendAutoCutRequest(
             float startPointX,
             float startPointY,
@@ -66,22 +97,28 @@ namespace OhMyWoodWorkerSimulator.Network
         {
             Frame frame = new Frame();
 
-            byte[] request = 
+            byte[] request =
                 frame.GetAutoCuttingRequest(
-                    startPointX, 
-                    startPointY, 
-                    endPointX, 
-                    endPointY, 
+                    startPointX,
+                    startPointY,
+                    endPointX,
+                    endPointY,
                     widht);
 
             _exchangeChannel.Write(request);
 
-            byte[] answer = 
+            byte[] answer =
                 _exchangeChannel.Read();
 
             frame.ValidateAnswerAndFillSelf(answer);
         }
 
+        /// <summary>
+        /// Посылка запроса на ручной проход ножом по бруску.
+        /// </summary>
+        /// <param name="direction">Направление, по которому нож должен пойти.</param>
+        /// <param name="length">Длина шага, с которой должен пройти нож.</param>
+        /// <param name="width">Ширина ножа.</param>
         public void SendManualCutRequest(
             EDirection direction,
             float length,
@@ -89,21 +126,26 @@ namespace OhMyWoodWorkerSimulator.Network
         {
             Frame frame = new Frame();
 
-            byte[] request = 
+            byte[] request =
                 frame.GetManualCuttingRequest(
-                    direction, 
-                    length, 
+                    direction,
+                    length,
                     width);
 
             _exchangeChannel.Write(
                 request);
 
-            byte[] answer = 
+            byte[] answer =
                 _exchangeChannel.Read();
 
             frame.ValidateAnswerAndFillSelf(answer);
         }
 
+        //
+        // Приватные методы.
+        //
+
+        // Интерпретация пришедшего ответа с параметрами бруска от строгального станка.
         private float[] GetBrickParamsFromAnswer(byte[] answer)
         {
             float x = BitConverter.ToSingle(answer, 0);

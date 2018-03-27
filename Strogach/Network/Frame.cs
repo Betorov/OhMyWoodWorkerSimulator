@@ -6,25 +6,54 @@ using System.Threading.Tasks;
 
 namespace Strogach.Network
 {
+    /// <summary>
+    /// Класс - протокол.
+    /// </summary>
     internal class Frame
     {
+        //
+        // Публичные переменные.
+        //
+
+        /// <summary>
+        /// Команда, с которой работает фрейм.
+        /// </summary>
         public ECommands Command { get; private set; }
 
+        /// <summary>
+        /// Данные, которые обрабатывает фрейм.
+        /// </summary>
         public byte[] Data { get; private set; }
+
+        //
+        // Публичные методы.
+        //
+
+        /// <summary>
+        /// Самозаполнение фрейма из запроса к строгальному станку.
+        /// </summary>
+        /// <param name="request">Запрос к строгальному станку.</param>
         public void FillSelfFromRequest(byte[] request)
         {
-            _command = (ECommands)request[0];
-
-            Data = 
+            Data =
                 new byte[request.Length - 1];
 
             Array.Copy(
-                request, 
-                1, 
-                Data, 
-                0, 
+                request,
+                1,
+                Data,
+                0,
                 Data.Length);
         }
+
+        /// <summary>
+        /// Формирует ответ на запрос параметров станка.
+        /// </summary>
+        /// <param name="startPointX">Начальная точка Х.</param>
+        /// <param name="startPointY">Начальная точка Y.</param>
+        /// <param name="length">Длина бруска.</param>
+        /// <param name="width">Ширина бруска.</param>
+        /// <returns></returns>
         public byte[] GetBrickParamsAnswer(
             float startPointX,
             float startPointY,
@@ -37,9 +66,9 @@ namespace Strogach.Network
 
             byte[] usefulData =
                 GetUserfulDataFromParams(
-                    startPointX, 
-                    startPointY, 
-                    length, 
+                    startPointX,
+                    startPointY,
+                    length,
                     width);
 
             answer.AddRange(usefulData);
@@ -47,21 +76,36 @@ namespace Strogach.Network
             return answer.ToArray();
         }
 
+        /// <summary>
+        /// Формирует ответ, который обозначает, что запрос обработался без проблем.
+        /// </summary>
         public byte GetOkAnswer()
         {
             return (byte)EErrors.Ok;
         }
 
+        /// <summary>
+        /// Формирует ответ - ошибку об автоматическом проходе по бруску.
+        /// </summary>
         public byte GetAutoErrorAnswer()
-        {
-            return (byte)EErrors.ManualError;
-        }
-
-        public byte GetManualErrorAnswer()
         {
             return (byte)EErrors.AutoError;
         }
 
+        /// <summary>
+        /// Формирует ответ - ошибку об ручном проходе по бруску.
+        /// </summary>
+        /// <returns></returns>
+        public byte GetManualErrorAnswer()
+        {
+            return (byte)EErrors.ManualError;
+        }
+
+        //
+        // Приватные методы.
+        //
+
+        // Преобразует данные в байтовый вид.
         private byte[] GetUserfulDataFromParams(params float[] settings)
         {
             var usefulData = new List<byte>();
