@@ -14,22 +14,10 @@ namespace ExchangeChannel
         static CancellationTokenSource _tokenSource;
         static void Main(string[] args)
         {
-            _tokenSource =
-                new CancellationTokenSource();
-
-            _server = 
-                new Server(_tokenSource);
-
-            Task task = 
-                new Task(
-                    new Action(
-                        async () => 
-                            await _server.RunServerListenerAsync(8080)));
-
-            task.Start();
-
-            Console.ReadLine();
+            Starter.StartServer();
         }
+
+
     }
 }
 

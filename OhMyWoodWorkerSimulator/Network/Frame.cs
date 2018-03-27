@@ -118,10 +118,9 @@ namespace OhMyWoodWorkerSimulator.Network
         /// <param name="answer">Ответ от устройства на команду.</param>
         public void ValidateAnswerAndFillSelf(byte[] answer)
         {
-            if (answer.Length == 1)
+            if (answer.First() == (byte)EErrors.Ok)
                 EnsureResultCode(answer.First());
-
-            if (answer[0] != (byte)_currentCommand)
+            else if (answer[0] != (byte)_currentCommand)
                 throw new Exception("Неправильный ответ на команду.");
 
             Data = new byte[answer.Length - 1];

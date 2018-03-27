@@ -59,14 +59,10 @@ namespace ExchangeChannel.Network
             IPAddress address,
             int port)
         {
-            IPEndPoint endPoint =
-                new IPEndPoint(
-                    address,
-                    port);
-
             _tcpClient =
-                new TcpClient(
-                    endPoint);
+                new TcpClient();
+
+            _tcpClient.Connect(address, port);
 
             _stream =
                 _tcpClient.GetStream();
