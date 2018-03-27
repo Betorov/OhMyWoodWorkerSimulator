@@ -36,8 +36,7 @@ namespace ExchangeChannel.Network
                     port);
 
             _tcpClient =
-                new TcpClient(
-                    endPoint);
+                new TcpClient(endPoint);
 
             _stream = 
                 _tcpClient.GetStream();

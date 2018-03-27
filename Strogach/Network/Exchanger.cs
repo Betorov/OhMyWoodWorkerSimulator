@@ -4,15 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExchangeChannel.Network;
 
 namespace Strogach.Network
 {
     public class Exchanger
     {
         private StrogachChannel _exchangeChannel;
+        private Channel exchangeChannel;
+
         public Exchanger(StrogachChannel exchangeChannel)
         {
             _exchangeChannel = exchangeChannel;
+        }
+
+        public Exchanger(Channel exchangeChannel)
+        {
+            this.exchangeChannel = exchangeChannel;
+        }
+
+        internal void SendHandshakeRequestAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public void React(byte[] request)

@@ -138,7 +138,7 @@ namespace ExchangeChannel.Network
                 _clients.FirstOrDefault(
                     c => c.Id == id);
 
-            if (!(client is null))
+           // if (!(client is null))
                 _clients.Remove(client);
         }
 

@@ -22,9 +22,8 @@ namespace Strogach.Network
             private set;
         }
 
-        public int ChannelPriority => throw new NotImplementedException();
-
-        public string ChannelName => throw new NotImplementedException();
+       // public int ChannelPriority => throw new NotImplementedException();
+       // public string ChannelName => throw new NotImplementedException();
 
         public void RunListenerTask()
         {
