@@ -53,14 +53,18 @@ namespace ExchangeChannel.Network
 
         public byte[] Read()
         {
-            MemoryStream response = new MemoryStream();
+             byte[] data = new byte[64];
 
-            _stream.CopyTo(response);
+            do
+            {
+                _stream.Read(
+                    data,
+                    0,
+                    data.Length);
+            }
+            while (_stream.DataAvailable);
 
-            var answer =
-                new byte[response.Position];
-
-            return answer;
+            return data;
         }
     }
 }
