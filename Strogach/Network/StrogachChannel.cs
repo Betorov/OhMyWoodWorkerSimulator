@@ -1,4 +1,4 @@
-﻿using ExchangeChannel.Network;
+using ExchangeChannel.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,26 +16,7 @@ namespace Strogach.Network
             get;
             private set;
         }
-        public void RunListenerTask()
-        {
-            MemoryStream requestStream = new MemoryStream();
-
-            while(true)
-            {
-                do
-                {
-                    _stream.CopyTo(requestStream);
-                }
-                while (_stream.DataAvailable);
-
-                Data = new byte[requestStream.Position];
-
-                requestStream.Read(Data, 0, Data.Length);
-
-                var exchanger = new Exchanger(this);
-                exchanger.React(Data);
-            }
-        }
+        
 
         public override void ConnectToServer(
             IPAddress address, 
@@ -47,6 +28,23 @@ namespace Strogach.Network
                 new Task(
                     new Action(
                         () => RunListenerTask()));
+        }
+
+        private void RunListenerTask()
+        {
+            Data = new byte[64];
+
+            do
+            {
+                _stream.Read(
+                    Data,
+                    0,
+                    Data.Length);
+            }
+            while (_stream.DataAvailable);
+
+            var exchanger = new Exchanger(this);
+            exchanger.React(Data);
         }
     }
 }
