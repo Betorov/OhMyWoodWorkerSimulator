@@ -109,6 +109,8 @@ namespace OhMyWoodWorkerSimulator.Network
                     length,
                     width);
 
+            request.AddRange(usefulData);
+
             return request.ToArray();
         }
 

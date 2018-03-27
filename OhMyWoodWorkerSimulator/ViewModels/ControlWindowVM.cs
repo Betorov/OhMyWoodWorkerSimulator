@@ -197,10 +197,10 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                 {
                     if (IsHandMode && IsWork && (!FlagException))
                     {
-                        MyHacsaw.X0++;
-                        BeginX = MyHacsaw.X0.ToString();
-                        VisibilityMoveButons = true;
-
+                        //MyHacsaw.X0++;
+                        //BeginX = MyHacsaw.X0.ToString();
+                        //VisibilityMoveButons = true;
+                        MessageBox.Show(MyHacsaw.LengthStep.ToString() + MyHacsaw.Width.ToString());
                         //MessageBox.Show("Up!");
                         if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Up, MyHacsaw.LengthStep, MyHacsaw.Width);
                     }
