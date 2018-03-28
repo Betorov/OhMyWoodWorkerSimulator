@@ -1,9 +1,6 @@
 ﻿using Strogach.Context;
 using System;
-<<<<<<< HEAD
 using ExchangeChannel.Network;
-=======
->>>>>>> Server
 
 namespace Strogach.Network
 {
@@ -18,10 +15,6 @@ namespace Strogach.Network
 
         // Канал для обмена данными с пультом управления.
         private StrogachChannel _exchangeChannel;
-<<<<<<< HEAD
-        private Channel exchangeChannel;
-=======
->>>>>>> Server
 
         //
         // Конструкторы.
@@ -32,19 +25,6 @@ namespace Strogach.Network
             _exchangeChannel = exchangeChannel;
         }
 
-<<<<<<< HEAD
-        internal void SendHandshakeRequestAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Exchanger(Channel exchangeChannel)
-        {
-            this.exchangeChannel = exchangeChannel;
-        }
-
-=======
->>>>>>> Server
         //
         // Публичные методы.
         //
