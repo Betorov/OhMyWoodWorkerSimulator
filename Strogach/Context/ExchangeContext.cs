@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Strogach.Context
 {
-    public static class ExchangeContext
+    public class ExchangeContext
     {
         public static float XCoordinate = 0;
         public static float YCoordinate = 0;
@@ -20,5 +20,11 @@ namespace Strogach.Context
         public static float CutWidth = 0;
         public static EDirection Direction;
         public static float CutStep = 0;
+
+        public ExchangeContext() {
+
+        }
     }
+
+
 }

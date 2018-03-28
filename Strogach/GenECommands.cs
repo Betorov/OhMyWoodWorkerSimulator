@@ -12,12 +12,11 @@ namespace Strogach.Context
     {
         public GenECommands()
         {
-            var exchangeChannel = new ExchangeChannel.Network.Channel();
+            var exchangeChannel = new StrogachChannel();
             IPAddress iPAddress = IPAddress.Parse("127.0.0.1");
 
             exchangeChannel.ConnectToServer(IPAddress.Parse("89.179.187.119"), 25565);
             MyExchanger = new Exchanger(exchangeChannel);
-            MyExchanger.SendHandshakeRequestAsync();
             MyExchanger.SendOk();
         }
 

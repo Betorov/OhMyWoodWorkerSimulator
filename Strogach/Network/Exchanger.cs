@@ -15,7 +15,6 @@ namespace Strogach.Network
 
         // Канал для обмена данными с пультом управления.
         private StrogachChannel _exchangeChannel;
-        private Channel exchangeChannel;
 
         //
         // Конструкторы.
@@ -26,16 +25,7 @@ namespace Strogach.Network
             _exchangeChannel = exchangeChannel;
         }
 
-        internal void SendHandshakeRequestAsync()
-        {
             throw new NotImplementedException();
-        }
-
-        public Exchanger(Channel exchangeChannel)
-        {
-            this.exchangeChannel = exchangeChannel;
-        }
-
         //
         // Публичные методы.
         //
