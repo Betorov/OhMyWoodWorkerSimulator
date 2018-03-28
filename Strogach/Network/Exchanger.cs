@@ -1,6 +1,8 @@
 ﻿using Strogach.Context;
 using System;
 using ExchangeChannel.Network;
+=======
+>>>>>>> Server
 
 namespace Strogach.Network
 {
@@ -16,6 +18,8 @@ namespace Strogach.Network
         // Канал для обмена данными с пультом управления.
         private StrogachChannel _exchangeChannel;
         private Channel exchangeChannel;
+=======
+>>>>>>> Server
 
         //
         // Конструкторы.
@@ -36,6 +40,8 @@ namespace Strogach.Network
             this.exchangeChannel = exchangeChannel;
         }
 
+=======
+>>>>>>> Server
         //
         // Публичные методы.
         //
