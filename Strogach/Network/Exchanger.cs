@@ -25,7 +25,6 @@ namespace Strogach.Network
             _exchangeChannel = exchangeChannel;
         }
 
-            throw new NotImplementedException();
         //
         // Публичные методы.
         //
