@@ -1,26 +1,29 @@
 ﻿using Strogach.Context;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ExchangeChannel.Network;
 
 namespace Strogach.Network
 {
+    /// <summary>
+    /// Основной класс для общения.
+    /// </summary>
     public class Exchanger
     {
+        //
+        // Приватные переменные.
+        //
+
+        // Канал для обмена данными с пультом управления.
         private StrogachChannel _exchangeChannel;
         private Channel exchangeChannel;
+
+        //
+        // Конструкторы.
+        //
 
         public Exchanger(StrogachChannel exchangeChannel)
         {
             _exchangeChannel = exchangeChannel;
-        }
-
-        public Exchanger(Channel exchangeChannel)
-        {
-            this.exchangeChannel = exchangeChannel;
         }
 
         internal void SendHandshakeRequestAsync()
@@ -28,6 +31,19 @@ namespace Strogach.Network
             throw new NotImplementedException();
         }
 
+        public Exchanger(Channel exchangeChannel)
+        {
+            this.exchangeChannel = exchangeChannel;
+        }
+
+        //
+        // Публичные методы.
+        //
+
+        /// <summary>
+        /// Метод, обновляющий контекст данных строгального станка в виде реакции на запрос..
+        /// </summary>
+        /// <param name="request">Запрос к станку.</param>
         public void React(byte[] request)
         {
             Frame frame = new Frame();
@@ -55,12 +71,19 @@ namespace Strogach.Network
                 SetManualStepper(frame.Data);
                 // TODO: Notify system to go with some step
             }
-            else if(frame.Command == ECommands.Stop)
+            else if (frame.Command == ECommands.Stop)
             {
                 // TODO: NOtify system to stop auto cut.
             }
         }
 
+        /// <summary>
+        /// Отослать параметры бруска.
+        /// </summary>
+        /// <param name="startPointX">Начальная координата Х ножа.</param>
+        /// <param name="startPointY">Начальная координата У ножа.</param>
+        /// <param name="length">Длина бруска.</param>
+        /// <param name="width">Ширинка бруска.</param>
         public void SendParams(
             float startPointX,
             float startPointY,
@@ -68,15 +91,18 @@ namespace Strogach.Network
             float width)
         {
             var frame = new Frame();
-            byte[] answer = 
+            byte[] answer =
                 frame.GetBrickParamsAnswer(
-                    startPointX, 
-                    startPointY, 
-                    length, 
+                    startPointX,
+                    startPointY,
+                    length,
                     width);
             _exchangeChannel.Write(answer);
         }
 
+        /// <summary>
+        /// Отсылает ответ "Ок"
+        /// </summary>
         public void SendOk()
         {
             var frame = new Frame();
@@ -86,6 +112,9 @@ namespace Strogach.Network
             _exchangeChannel.Write(new[] { answer });
         }
 
+        /// <summary>
+        /// Отсылает ошибку на запрос ручного прохода по станку.
+        /// </summary>
         public void SendManualError()
         {
             var frame = new Frame();
@@ -95,6 +124,9 @@ namespace Strogach.Network
             _exchangeChannel.Write(new[] { answer });
         }
 
+        /// <summary>
+        /// Отсылает ошибку на запрос автоматического прохода по станку.
+        /// </summary>
         public void SendAutoError()
         {
             var frame = new Frame();
@@ -104,6 +136,11 @@ namespace Strogach.Network
             _exchangeChannel.Write(new[] { answer });
         }
 
+        //
+        // Приватные методы.
+        //
+
+        // Устанавливает координаты для контекста из данных.
         private void SetCoordinatesFromData(byte[] data)
         {
             ExchangeContext.XCoordinate = BitConverter.ToSingle(data, 0);
@@ -115,6 +152,7 @@ namespace Strogach.Network
             ExchangeContext.CutWidth = BitConverter.ToSingle(data, 16);
         }
 
+        // Устанавлявает координаты для ручного прохода по бруску.
         private void SetManualStepper(byte[] data)
         {
             ExchangeContext.Direction = (EDirection)data[0];

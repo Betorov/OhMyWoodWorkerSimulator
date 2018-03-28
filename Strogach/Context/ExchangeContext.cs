@@ -9,8 +9,6 @@ namespace Strogach.Context
 {
     public static class ExchangeContext
     {
-        
-
         public static float XCoordinate = 0;
         public static float YCoordinate = 0;
         public static float BrickLength = 0;

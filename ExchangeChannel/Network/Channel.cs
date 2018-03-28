@@ -1,47 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExchangeChannel.Network
 {
+    /// <summary>
+    /// Класс для передачи данных между пультом и строгальным станком.
+    /// </summary>
     public class Channel
     {
-        protected NetworkStream _stream;
+        //
+        // Публичные переменные.
+        //
 
-        private TcpClient _tcpClient;
-
+        /// <summary>
+        /// Считываемые данные.
+        /// </summary>
         public byte[] Data
         {
             get;
             private set;
         }
 
+        //
+        // Защищённые перменные.
+        //
+
+        /// <summary>
+        /// Поток, по которому будет производиться передача данных.
+        /// </summary>
+        protected NetworkStream _stream;
+
+        //
+        // Приватные переменные.
+        //
+
+        /// <summary>
+        /// Данные о подключённом клиенте.
+        /// </summary>
+        private TcpClient _tcpClient;
+
+        //
+        // Конструкторы.
+        //
+
         public Channel()
         {
             _tcpClient = new TcpClient();
         }
 
+
+        /// <summary>
+        /// Подключение к серверу - ретранслятору, 
+        /// через который будет происходить обмен данными.
+        /// </summary>
+        /// <param name="address">IP-адрес сервера.</param>
+        /// <param name="port">Порт сервера.</param>
         public virtual void ConnectToServer(
             IPAddress address,
             int port)
         {
-            IPEndPoint endPoint =
-                new IPEndPoint(
-                    address,
-                    port);
-
             _tcpClient =
-                new TcpClient(endPoint);
+                new TcpClient();
 
-            _stream = 
+            _tcpClient.Connect(address, port);
+
+            _stream =
                 _tcpClient.GetStream();
         }
 
+        /// <summary>
+        /// Запись информации в поток.
+        /// </summary>
+        /// <param name="request">Данные, записываемые в поток в байтовом виде.</param>
         public void Write(byte[] request)
         {
             _stream.Write(
@@ -50,16 +80,21 @@ namespace ExchangeChannel.Network
                 request.Length);
         }
 
-        public byte[] Read()
+        /// <summary>
+        /// Чтение данных, записанных в поток.
+        /// </summary>
+        /// <returns>Байтовые данные.</returns>
+        public byte[] Read(int answerLength)
         {
-            MemoryStream response = new MemoryStream();
 
-            _stream.CopyTo(response);
+            byte[] data = new byte[64];
 
-            var answer =
-                new byte[response.Position];
+            _stream.Read(
+                data,
+                0,
+                answerLength);
 
-            return answer;
+            return data;
         }
     }
 }

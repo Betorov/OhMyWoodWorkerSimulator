@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExchangeChannel.Network
 {
@@ -44,12 +40,18 @@ namespace ExchangeChannel.Network
             private set;
         }
 
+        /// <summary>
+        /// Данные о текущем клиенте
+        /// </summary>
+        public TcpClient NetClient
+        {
+            get;
+            private set;
+        }
+
         //
         // Приватные переменные.
         //
-
-        // Данные о текущем клиенте.
-        private TcpClient _tcpClient;
 
         // Объект сервера для связи с ним.
         private Server _server;
@@ -59,11 +61,11 @@ namespace ExchangeChannel.Network
         //
 
         public Client(
-            TcpClient tcpClient, 
+            TcpClient tcpClient,
             Server server)
         {
             Id = Guid.NewGuid().ToString();
-            _tcpClient = tcpClient;
+            NetClient = tcpClient;
             _server = server;
             server.AddNewClient(this);
         }
@@ -84,14 +86,14 @@ namespace ExchangeChannel.Network
         public void ProcessMessage()
         {
             Stream =
-                _tcpClient.GetStream();
+                NetClient.GetStream();
 
-            while(true)
+            while (true)
             {
                 byte[] message = GetMessage();
                 _server.Send(message, this);
             }
-            
+
         }
 
         /// <summary>
@@ -99,10 +101,10 @@ namespace ExchangeChannel.Network
         /// </summary>
         public void Close()
         {
-            if(Stream != null && _tcpClient != null)
+            if (Stream != null && NetClient != null)
             {
                 Stream.Close();
-                _tcpClient.Close();
+                NetClient.Close();
             }
         }
 
@@ -113,13 +115,13 @@ namespace ExchangeChannel.Network
         // Чтение пришедшего пакета данных.
         private byte[] GetMessage()
         {
-            byte[] data = new byte[1024];
+            byte[] data = new byte[64];
 
             do
             {
                 Stream.Read(
-                    data, 
-                    0, 
+                    data,
+                    0,
                     data.Length);
             }
             while (Stream.DataAvailable);
