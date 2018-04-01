@@ -121,7 +121,7 @@ namespace ExchangeChannel.Network
             receiver.Stream.Write(
                 message,
                 0,
-                3);
+                message.Length);
         }
 
         /// <summary>
