@@ -16,7 +16,6 @@ namespace Strogach.Context
         public static float BrickLength { get; set; }
         public static float BrickWidth { get; set; }
 
-
         public static float NewXCoordinate { get; set; }
         public static float NewYCoordinate { get; set; }
         public static float CutWidth { get; set; }
