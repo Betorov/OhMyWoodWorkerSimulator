@@ -9,22 +9,31 @@ namespace Strogach.Context
 {
     public class ExchangeContext
     {
-        public static float XCoordinate = 0;
-        public static float YCoordinate = 0;
-        public static float BrickLength = 0;
-        public static float BrickWidth = 0;
+        public  float XCoordinate = 2;
+        public  float YCoordinate = 5;
+        public  float BrickLength = 10;
+        public  float BrickWidth = 10;
 
 
-        public static float newXCoordinate = 0;
-        public static float newYCoordinate = 0;
-        public static float CutWidth = 0;
-        public static EDirection Direction;
-        public static float CutStep = 0;
+        public  float newXCoordinate = 4;
+        public  float newYCoordinate = 4;
+        public  float CutWidth = 1;
+        public  EDirection Direction;
+        public  float CutStep = 5;
+        public bool hasStart = true;
+
+
 
         public ExchangeContext() {
 
         }
-    }
 
+        public int State(int _state) {
+            return _state;
+        }
+
+        
+
+    }
 
 }
