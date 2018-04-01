@@ -60,17 +60,23 @@ namespace ExchangeChannel.Network
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                Client firstClient =
+                 Client firstClient =
                     await GetNewConnectedClient();
                 AddNewClient(firstClient);
+
+                Console.WriteLine("Клиент с IP: " + firstClient.NetClient.Client.LocalEndPoint + " успешно подключён.");
 
                 Client secondClient =
                     await GetNewConnectedClient();
                 AddNewClient(secondClient);
 
+                Console.WriteLine("Клиент с IP: " + secondClient.NetClient.Client.LocalEndPoint + " успешно подключён.");
+
                 AppendNewBound(
                     firstClient,
                     secondClient);
+                Console.WriteLine("Клиенты успешно связаны.");
+
 
                 Task firstClientProcess =
                     new Task(
@@ -101,11 +107,21 @@ namespace ExchangeChannel.Network
         {
             Client receiver = sender.BoundedClient;
 
+            Console.WriteLine("Пересылка: ");
+
+            foreach(var datum in message)
+            {
+                Console.Write(
+                    "0x" +
+                    datum.ToString("X") + 
+                    " ");
+            }
+            Console.WriteLine();
+
             receiver.Stream.Write(
                 message,
                 0,
                 3);
-
         }
 
         /// <summary>
