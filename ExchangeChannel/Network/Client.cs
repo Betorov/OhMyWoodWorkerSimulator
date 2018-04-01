@@ -85,14 +85,21 @@ namespace ExchangeChannel.Network
         /// </summary>
         public void ProcessMessage()
         {
-            Stream =
-                NetClient.GetStream();
-
-            while (true)
+            try
             {
-                byte[] message = GetMessage();
-                Console.WriteLine("Передача сообщения от клиента " + NetClient.Client.LocalEndPoint);
-                _server.Send(message, this);
+                Stream = NetClient.GetStream();
+
+                while (true)
+                {
+                    byte[] message = GetMessage();
+                    Console.WriteLine("Передача сообщения от клиента " 
+                        + NetClient.Client.LocalEndPoint);
+                    _server.Send(message, this);
+                }
+            }
+            catch
+            {
+                this.Close();
             }
 
         }

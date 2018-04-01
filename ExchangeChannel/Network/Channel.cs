@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 
 namespace ExchangeChannel.Network
@@ -59,14 +60,23 @@ namespace ExchangeChannel.Network
             IPAddress address,
             int port)
         {
-            _tcpClient =
-                new TcpClient();
+            try
+            {
+                _tcpClient =
+                    new TcpClient();
 
-            _tcpClient.Connect(address, port);
+                _tcpClient.Connect(address, port);
 
-            _stream =
-                _tcpClient.GetStream();
+                _stream =
+                    _tcpClient.GetStream();
+            }
+            catch
+            {
+                ConnectToServer(address, port);
+            }
         }
+
+
 
         /// <summary>
         /// Запись информации в поток.
@@ -74,10 +84,17 @@ namespace ExchangeChannel.Network
         /// <param name="request">Данные, записываемые в поток в байтовом виде.</param>
         public void Write(byte[] request)
         {
-            _stream.Write(
-                request,
-                0,
-                request.Length);
+            try
+            {
+                _stream.Write(
+                    request,
+                    0,
+                    request.Length);
+            }
+            catch
+            {
+                Console.WriteLine("Ошибка при передаче данных.");
+            }
         }
 
         /// <summary>
@@ -89,10 +106,18 @@ namespace ExchangeChannel.Network
 
             byte[] data = new byte[answerLength];
 
-             _stream.Read(
-                data,
-                0,
-                answerLength);
+            try
+            {
+                _stream.Read(
+                   data,
+                   0,
+                   answerLength);
+            }
+            catch
+            {
+                Console.WriteLine("Ошибка при чтении данных.");
+            }
+
 
             return data;
         }
