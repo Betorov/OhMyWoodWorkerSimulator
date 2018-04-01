@@ -49,6 +49,7 @@ namespace ExchangeChannel.Network
         /// <param name="port">Порт сервера, на котором запускается поток.</param>
         public async Task RunServerListenerAsync(int port)
         {
+            Console.WriteLine("Сервер запускается...");
             CancellationToken cancellationToken =
                 _cancelationTokenSource.Token;
 
@@ -58,14 +59,17 @@ namespace ExchangeChannel.Network
 
             _listener.Start();
 
+            Console.WriteLine("Сервер запущен...");
             while (!cancellationToken.IsCancellationRequested)
             {
+                Console.WriteLine("Ожидание подключения первого клиента...");
                  Client firstClient =
                     await GetNewConnectedClient();
                 AddNewClient(firstClient);
 
                 Console.WriteLine("Клиент с IP: " + firstClient.NetClient.Client.LocalEndPoint + " успешно подключён.");
 
+                Console.WriteLine("Ожидание подключения второго клиента...");
                 Client secondClient =
                     await GetNewConnectedClient();
                 AddNewClient(secondClient);
@@ -83,6 +87,7 @@ namespace ExchangeChannel.Network
                         new Action(
                             () =>
                             {
+                                Console.WriteLine("Запуск обработчика первого клиента...");
                                 firstClient.ProcessMessage();
                             }));
 
@@ -91,6 +96,7 @@ namespace ExchangeChannel.Network
                         new Action(
                             () =>
                             {
+                                Console.WriteLine("Запуск обработчика второго клиента...");
                                 secondClient.ProcessMessage();
                             }));
 
@@ -174,6 +180,7 @@ namespace ExchangeChannel.Network
         // Завершение работы сервера и отключение всех клиентов.
         private void Disconnect()
         {
+            Console.WriteLine("Отключение сервера...");
             _listener.Stop();
 
             foreach (var client in _clients)

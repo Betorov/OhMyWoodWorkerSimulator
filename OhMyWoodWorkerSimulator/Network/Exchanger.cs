@@ -93,7 +93,8 @@ namespace OhMyWoodWorkerSimulator.Network
             float startPointY,
             float endPointX,
             float endPointY,
-            float widht)
+            float widht,
+            float speed)
         {
             Frame frame = new Frame();
 
@@ -103,7 +104,8 @@ namespace OhMyWoodWorkerSimulator.Network
                     startPointY,
                     endPointX,
                     endPointY,
-                    widht);
+                    widht,
+                    speed);
 
             _exchangeChannel.Write(request);
 
