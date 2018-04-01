@@ -7,37 +7,21 @@ using System.Threading.Tasks;
 
 namespace Strogach.Context
 {
-    public class ExchangeContext
+    public static class ExchangeContext
     {
-        public float XCoordinate = 2;
-        public float YCoordinate = 5;
-        public float BrickLength = 10;
-        public float BrickWidth = 10;
+        public static EState State { get; set; }
+
+        public static float XCoordinate { get; set; }
+        public static float YCoordinate { get; set; }
+        public static float BrickLength { get; set; }
+        public static float BrickWidth { get; set; }
 
 
-        public float newXCoordinate = 4;
-        public float newYCoordinate = 4;
-        public float CutWidth = 1;
-        public EDirection Direction;
-        public float CutStep = 5;
-        public ExchangeContext()
-        {
-
-        }
-
-        //Auto or Manual or Stop
-        public int State(int _state)
-        {
-            return _state;
-        }
-
-        //param[]
-        public float[] GetCoordinatesFromData(float[] _param)
-        {
-            _param = new float[5];
-            return _param;
-        }
-
-
+        public static float NewXCoordinate { get; set; }
+        public static float NewYCoordinate { get; set; }
+        public static float CutWidth { get; set; }
+        public static EDirection Direction { get; set; }
+        public static float CutStep { get; set; }
+        public static float Speed { get; set; }
     }
 }

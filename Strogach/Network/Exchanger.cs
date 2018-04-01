@@ -21,9 +21,6 @@ namespace Strogach.Network
         // Канал для обмена данными с пультом управления.
         private StrogachChannel _exchangeChannel;
 
-        // Канал для обмена данными со строгачем.
-        private ExchangeContext _exchangeContext;
-
         //
         // Конструкторы.
         //
@@ -31,11 +28,6 @@ namespace Strogach.Network
         public Exchanger(StrogachChannel exchangeChannel)
         {
             _exchangeChannel = exchangeChannel;
-        }
-
-        public Exchanger(ExchangeContext exchangeContext)
-        {
-            _exchangeContext = exchangeContext;
         }
 
         //
@@ -58,26 +50,23 @@ namespace Strogach.Network
             else if (frame.Command == ECommands.BrickParameters)
             {
                 SendParams(
-                    _exchangeContext.XCoordinate,
-                    _exchangeContext.YCoordinate,
-                    _exchangeContext.BrickLength,
-                    _exchangeContext.BrickWidth
+                    ExchangeContext.XCoordinate,
+                    ExchangeContext.YCoordinate,
+                    ExchangeContext.BrickLength,
+                    ExchangeContext.BrickWidth
                     );
             }
             else if (frame.Command == ECommands.Auto)
             {
                 SetCoordinatesFromData(frame.Data);
-                _exchangeContext.State((int)EModeState.auto);
             }
             else if (frame.Command == ECommands.Manual)
             {
                 SetManualStepper(frame.Data);
-                _exchangeContext.State((int)EModeState.manual);
                 // TODO: Notify system to go with some step
             }
             else if (frame.Command == ECommands.Stop)
             {
-                _exchangeContext.State((int)EModeState.stop);
                 // TODO: NOtify system to stop auto cut.
             }
         }
@@ -148,25 +137,21 @@ namespace Strogach.Network
         // Устанавливает координаты для контекста из данных.
         private void SetCoordinatesFromData(byte[] data)
         {
-                float[] getParam = new float[5];
-                getParam[1] = (_exchangeContext.XCoordinate = BitConverter.ToSingle(data, 0));
-                getParam[2] = (_exchangeContext.YCoordinate = BitConverter.ToSingle(data, 4));
+            ExchangeContext.XCoordinate = BitConverter.ToSingle(data, 0);
+            ExchangeContext.YCoordinate = BitConverter.ToSingle(data, 4);
+            ExchangeContext.NewXCoordinate = BitConverter.ToSingle(data, 8);
+            ExchangeContext.NewYCoordinate = BitConverter.ToSingle(data, 12);
 
-                getParam[3] = (_exchangeContext.newXCoordinate = BitConverter.ToSingle(data, 8));
-                getParam[4] = (_exchangeContext.newYCoordinate = BitConverter.ToSingle(data, 12));
-
-                getParam[5] = (_exchangeContext.CutWidth = BitConverter.ToSingle(data, 16));
-                _exchangeContext.GetCoordinatesFromData(getParam);
+            ExchangeContext.CutWidth = BitConverter.ToSingle(data, 16);
+            ExchangeContext.Speed = BitConverter.ToSingle(data, 20);
         }
 
         // Устанавлявает координаты для ручного прохода по бруску.
         private void SetManualStepper(byte[] data)
         {
-            float[] getParam = new float[3];
-            getParam[1] = (float)(_exchangeContext.Direction = (EDirection)data[0]);
-            getParam[2] = (_exchangeContext.CutStep = BitConverter.ToSingle(data, 1));
-            getParam[3] = (_exchangeContext.CutWidth = BitConverter.ToSingle(data, 5));
-            _exchangeContext.GetCoordinatesFromData(getParam);
+            ExchangeContext.Direction = (EDirection)data[0];
+            ExchangeContext.CutStep = BitConverter.ToSingle(data, 1);
+            ExchangeContext.CutWidth = BitConverter.ToSingle(data, 5);
         }
     }
 }

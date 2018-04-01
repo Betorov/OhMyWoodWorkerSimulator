@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Context\ExchangeContext.cs" />
     <Compile Include="GenECommands.cs" />
+    <Compile Include="Network\EState.cs" />
     <Compile Include="Network\StrogachChannel.cs" />
     <Compile Include="Network\ECommands.cs" />
     <Compile Include="Network\EDirection.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Network\Frame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\CoordinatesUpdaterTest.cs" />
     <Compile Include="Tests\Network\AnswerSendingTests.cs" />
   </ItemGroup>
   <ItemGroup>
