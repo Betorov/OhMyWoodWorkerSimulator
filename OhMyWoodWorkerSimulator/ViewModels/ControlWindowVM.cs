@@ -37,6 +37,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
         private bool _isWork = false;
         private string _stateString = String.Empty;
         private bool _flagException = false;
+        private string _moveStrintg = String.Empty;
 
         private string _xBegin = String.Empty;
         private string _yBegin = String.Empty;
@@ -57,7 +58,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     MyExchanger = new Exchanger(exchangeChannel);
                     //MyExchanger.SendHandshakeRequestAsync();
                     IsConnected = true;
-                    MessageBox.Show("!!!!");
+                    MessageBox.Show("Успешное подключение к серверу");
                 }
                 catch (Exception e) { IsConnected = false; }
             });
@@ -92,6 +93,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     IsAutoMode = true;
                     IsHandMode = false;
                     IsWork = false;
+                    MoveString = String.Empty;
                     VisibilityMoveButons = false;
                     VisibilityStrings = true;
                     VisibilityOtherComponents = true;
@@ -112,6 +114,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     IsAutoMode = false;
                     IsHandMode = true;
                     IsWork = false;
+                    MoveString = String.Empty;
                     VisibilityMoveButons = true;
                     VisibilityStrings = false;
                     VisibilityOtherComponents = true;
@@ -137,7 +140,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                         EndX != String.Empty &&
                         EndY != String.Empty)
                         {
-                            MessageBox.Show("Got it!");
+                            //MessageBox.Show("Got it!");
                             IsWork = true;
                             FlagException = false;
                             if(IsConnected) MyExchanger.SendAutoCutRequest(MyHacsaw.X0, MyHacsaw.Y0, MyHacsaw.XEnd, MyHacsaw.YEnd, MyHacsaw.Width);
@@ -154,7 +157,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                         BeginY != String.Empty 
                         )
                         {
-                            MessageBox.Show("Got it!");
+                            //MessageBox.Show("Got it!");
                             IsWork = true;
                             FlagException = false;
                             
@@ -179,10 +182,16 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                 {
                     IsWork = false;
 
-                    if (IsConnected) MyHacsaw.XCurrent = MyExchanger.GetBrickParams().X;
-                    if (IsConnected) MyHacsaw.YCurrent = MyExchanger.GetBrickParams().Y;
-                    MyHacsaw.X0 = MyHacsaw.XCurrent;
-                    MyHacsaw.Y0 = MyHacsaw.YCurrent;
+                    var tempBrick = new Brick();
+                    //if (IsConnected) MyHacsaw.XCurrent = MyExchanger.GetBrickParams().X;
+                    //if (IsConnected) MyHacsaw.YCurrent = MyExchanger.GetBrickParams().Y;
+                    if (IsConnected)
+                    {
+                        tempBrick = MyExchanger.GetBrickParams();
+                    }
+
+                    MyHacsaw.X0 = tempBrick.X;
+                    MyHacsaw.Y0 = tempBrick.Y;
                 }));
             }
         }
@@ -197,12 +206,11 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                 {
                     if (IsHandMode && IsWork && (!FlagException))
                     {
-                        //MyHacsaw.X0++;
-                        //BeginX = MyHacsaw.X0.ToString();
-                        //VisibilityMoveButons = true;
-                        MessageBox.Show(MyHacsaw.LengthStep.ToString() + MyHacsaw.Width.ToString());
-                        //MessageBox.Show("Up!");
-                        if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Up, MyHacsaw.LengthStep, MyHacsaw.Width);
+                        MoveString = "Нажата клавиша 'Вверх'";
+                        Task.Factory.StartNew(() =>
+                        {
+                            if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Up, MyHacsaw.LengthStep, MyHacsaw.Width);
+                        });
                     }
                 }));
             }
@@ -217,10 +225,14 @@ namespace OhMyWoodWorkerSimulator.ViewModels
             {
                 return new delegateCommand(new Action(() =>
                 {
-                    if (IsHandMode && IsWork&&(!FlagException))
+                    if (IsHandMode && IsWork && (!FlagException))
                     {
-                        MessageBox.Show("Down!");
-                        if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Down, MyHacsaw.LengthStep, MyHacsaw.Width);
+                        MoveString = "Нажата клавиша 'Вниз'";
+                        Task.Factory.StartNew(() =>
+                        {
+                            if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Down, MyHacsaw.LengthStep, MyHacsaw.Width);
+
+                        });
                     }
                 }));
             }
@@ -237,8 +249,11 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                 {
                     if (IsHandMode && IsWork && (!FlagException))
                     {
-                        MessageBox.Show("Left!");
-                        if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Left, MyHacsaw.LengthStep, MyHacsaw.Width);
+                        MoveString = "Нажата клавиша 'Влево'";
+                        Task.Factory.StartNew(() =>
+                        {
+                            if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Left, MyHacsaw.LengthStep, MyHacsaw.Width);
+                        });
                     }
                 }));
             }
@@ -255,8 +270,12 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                 {
                     if (IsHandMode && IsWork && (!FlagException))
                     {
-                        MessageBox.Show("Right!");
-                        if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Right, MyHacsaw.LengthStep, MyHacsaw.Width);
+                        MoveString = "Нажата клавиша 'Вправо'";
+                        Task.Factory.StartNew(() =>
+                        {
+                            if (IsConnected) MyExchanger.SendManualCutRequest(EDirection.Right, MyHacsaw.LengthStep, MyHacsaw.Width);
+
+                        });
                     }
                 }));
             }
@@ -434,5 +453,14 @@ namespace OhMyWoodWorkerSimulator.ViewModels
         /// Флаг проверки подключения к серверу
         /// </summary>
         public bool IsConnected { get => isConnected; set => isConnected = value; }
+        public string MoveString
+        {
+            get => _moveStrintg;
+            set
+            {
+                _moveStrintg = value;
+                OnPropertyChanged("MoveString");
+            }
+        }
     }
 }

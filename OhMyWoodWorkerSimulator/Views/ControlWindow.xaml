@@ -45,6 +45,7 @@
                 <Button x:Name="Btn_Down" IsEnabled="False" Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" Content="Вниз" HorizontalAlignment="Left" Margin="60,242,0,0" VerticalAlignment="Top" Width="45" Height="40"/>
                 <Button x:Name="Btn_Right" IsEnabled="False" Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" Content="Вправо" HorizontalAlignment="Left" Margin="110,217,0,0" VerticalAlignment="Top" Width="45" Height="40"/>
                 <Button x:Name="Btn_Left" IsEnabled="False" Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" Content="Влево" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Width="45" Height="40"/>
+                <Label Name="Label_Move" Content="{Binding MoveString, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Left="18" Canvas.Top="159"/>
             </Canvas>
         </Viewbox>
     </Grid>

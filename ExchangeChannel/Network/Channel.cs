@@ -87,9 +87,9 @@ namespace ExchangeChannel.Network
         public byte[] Read(int answerLength)
         {
 
-            byte[] data = new byte[64];
+            byte[] data = new byte[answerLength];
 
-            _stream.Read(
+             _stream.Read(
                 data,
                 0,
                 answerLength);
