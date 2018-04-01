@@ -14,7 +14,6 @@ namespace Strogach.Context
         public float BrickLength = 10;
         public float BrickWidth = 10;
 
-
         public float newXCoordinate = 4;
         public float newYCoordinate = 4;
         public float CutWidth = 1;
