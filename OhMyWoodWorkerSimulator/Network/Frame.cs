@@ -66,7 +66,8 @@ namespace OhMyWoodWorkerSimulator.Network
             float startPointY,
             float endPointX,
             float endPointY,
-            float widht)
+            float widht,
+            float speed)
         {
             _currentCommand = ECommands.Auto;
             var request = new List<byte>();
@@ -80,7 +81,8 @@ namespace OhMyWoodWorkerSimulator.Network
                     startPointY,
                     endPointX,
                     endPointY,
-                    widht);
+                    widht,
+                    speed);
 
             request.AddRange(usefulData);
 

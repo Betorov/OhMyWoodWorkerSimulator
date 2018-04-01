@@ -145,7 +145,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                             //MessageBox.Show("Got it!");
                             IsWork = true;
                             FlagException = false;
-                            if(IsConnected) MyExchanger.SendAutoCutRequest(MyHacsaw.X0, MyHacsaw.Y0, MyHacsaw.XEnd, MyHacsaw.YEnd, MyHacsaw.Width);
+                            if(IsConnected) MyExchanger.SendAutoCutRequest(MyHacsaw.X0, MyHacsaw.Y0, MyHacsaw.XEnd, MyHacsaw.YEnd, MyHacsaw.Width,MyHacsaw.Speed);
                             return;
                         }
                         else FlagException = true;
