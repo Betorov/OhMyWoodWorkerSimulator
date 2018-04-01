@@ -45,6 +45,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
         private string _yEnd = String.Empty;
         private string _width = String.Empty;
         private string _lengthStep = String.Empty;
+        private string _speed = String.Empty;
 
         public ControlWindowVM()
         {
@@ -138,7 +139,8 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                         BeginX != String.Empty &&
                         BeginY != String.Empty &&
                         EndX != String.Empty &&
-                        EndY != String.Empty)
+                        EndY != String.Empty&&
+                        Speed!=String.Empty)
                         {
                             //MessageBox.Show("Got it!");
                             IsWork = true;
@@ -183,8 +185,6 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     IsWork = false;
 
                     var tempBrick = new Brick();
-                    //if (IsConnected) MyHacsaw.XCurrent = MyExchanger.GetBrickParams().X;
-                    //if (IsConnected) MyHacsaw.YCurrent = MyExchanger.GetBrickParams().Y;
                     if (IsConnected)
                     {
                         tempBrick = MyExchanger.GetBrickParams();
@@ -277,18 +277,6 @@ namespace OhMyWoodWorkerSimulator.ViewModels
 
                         });
                     }
-                }));
-            }
-        }
-
-        public ICommand clickBtn_Try
-        {
-            get
-            {
-                return new delegateCommand(new Action(() =>
-                {
-                    
-                    //if( Key.Up)
                 }));
             }
         }
@@ -406,8 +394,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
         /// <summary>
         /// Строка с длинной шага
         /// </summary>
-        public string 
-            LengthStep
+        public string LengthStep
         {
             get
             {
@@ -422,6 +409,26 @@ namespace OhMyWoodWorkerSimulator.ViewModels
             {
                 _lengthStep = value;
                 OnPropertyChanged("LengthStep");
+            }
+        }
+        /// <summary>
+        /// Строка, задающая скорость рубанка
+        /// </summary>
+        public string Speed
+        {
+            get
+            {
+                if (!isNum(_speed) && _speed != String.Empty)
+                {
+                    Speed = _speed.Substring(0, _speed.Length - 1);
+                }
+                else MyHacsaw.Speed = isNumber(_speed);
+                return _speed;
+            }
+            set
+            {
+                _speed = value;
+                OnPropertyChanged("Speed");
             }
         }
         /// <summary>

@@ -16,6 +16,7 @@ namespace OhMyWoodWorkerSimulator.Models
         private float _yEnd = 0;
         private float _width = 0;
         private float _lengthStep = 0;
+        private float _speed = 0;
 
         public Hacksaw(float kX0, float kY0, float kXEnd, float kYEnd, float kWidth, float kLegthStep)
         {
@@ -76,5 +77,9 @@ namespace OhMyWoodWorkerSimulator.Models
         /// Текущая координаты рубанка по оси Y
         /// </summary>
         public float YCurrent { get => _yCurrent; set => _yCurrent = value; }
+        /// <summary>
+        /// Скорость двжижения рубанка в автоматическом режиме
+        /// </summary>
+        public float Speed { get => _speed; set => _speed = value; }
     }
 }

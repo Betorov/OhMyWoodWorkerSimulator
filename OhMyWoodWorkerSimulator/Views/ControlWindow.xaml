@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OhMyWoodWorkerSimulator.Views"
         xmlns:ViewModels="clr-namespace:OhMyWoodWorkerSimulator.ViewModels" x:Class="OhMyWoodWorkerSimulator.Views.ControlWindow"
         mc:Ignorable="d"
-        Title="Пульт управления" Height="324" Width="448" MinHeight="324" MinWidth="448">
+        Title="Пульт управления" Height="361.5" Width="448" MinHeight="324" MinWidth="448">
     <Window.DataContext>
         <ViewModels:ControlWindowVM/>
     </Window.DataContext>
@@ -22,30 +22,104 @@
 
     <Grid>
         <Viewbox x:Name="ViewBoxControl">
-            <Canvas x:Name="CanvasControl" Height="291" Width="438">
-                <Label x:Name="Label_Mode" Content="Выберите режим работы:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <RadioButton x:Name="RB_Auto" Content="Автоматический" Command="{Binding workAutoMode}" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-                <RadioButton x:Name="RB_Hand" Content="Ручной" Command="{Binding workHandMode}" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="Label_ActiveMode" Content="{Binding StateString}" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="201" Canvas.Top="10"/>
-                <TextBox x:Name="TB_X0" Text="{Binding BeginX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Height="23" Margin="356,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                <Label x:Name="Label_X0" Content="Начальная координата по оси X" Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Margin="164,61,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="TB_Y0" Text="{Binding BeginY,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Height="23" Margin="356,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                <Label x:Name="Label_Y0" Content="Начальная координата по оси Y" Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Margin="164,92,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="TB_XEnd" Text="{Binding EndX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" Margin="356,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                <Label x:Name="Label_XEnd" Content="Конечная координата по оси Х" Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Margin="170,123,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="TB_YEnd" Text="{Binding EndY,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="23" Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" Margin="356,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                <Label x:Name="Label_YEnd" Content="Конечная координата по оси Y" Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Margin="170,155,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="TB_Width" Text="{Binding Width,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Height="23"  Margin="356,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                <Label x:Name="Label_Width" Content="Ширина прорези" Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Margin="246,185,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="TB_LengthStep" Text="{Binding LengthStep,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Height="23" Margin="356,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                <Label x:Name="LabelLengthStep" Content="Длина шага" Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}"  HorizontalAlignment="Left" Margin="277,216,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="Btn_Accept" Content="Применить" Command="{Binding clickBtn_Accept}" Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Margin="350,257,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="Btn_Stop" Content="Стоп" Command="{Binding clickBtn_Stop}" Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Left" Margin="259,257,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="Btn_Up" IsEnabled="False" Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}"   Content="Вверх" HorizontalAlignment="Left" Margin="60,195,0,0" VerticalAlignment="Top" Width="45" Height="40"/>
-                <Button x:Name="Btn_Down" IsEnabled="False" Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" Content="Вниз" HorizontalAlignment="Left" Margin="60,242,0,0" VerticalAlignment="Top" Width="45" Height="40"/>
-                <Button x:Name="Btn_Right" IsEnabled="False" Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" Content="Вправо" HorizontalAlignment="Left" Margin="110,217,0,0" VerticalAlignment="Top" Width="45" Height="40"/>
-                <Button x:Name="Btn_Left" IsEnabled="False" Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" Content="Влево" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Width="45" Height="40"/>
-                <Label Name="Label_Move" Content="{Binding MoveString, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Canvas.Left="18" Canvas.Top="159"/>
+            <Canvas x:Name="CanvasControl" Height="328" Width="438">
+                <Label x:Name="Label_Mode" Content="Выберите режим работы:" 
+                       HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="RB_Auto" Content="Автоматический" 
+                             Command="{Binding workAutoMode}" HorizontalAlignment="Left" 
+                             Margin="10,41,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="RB_Hand" Content="Ручной" Command="{Binding workHandMode}" 
+                             HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="Label_ActiveMode" Content="{Binding StateString}" 
+                       HorizontalAlignment="Left" VerticalAlignment="Top" 
+                       Canvas.Left="201" Canvas.Top="10"/>
+                <TextBox x:Name="TB_X0" 
+                         Text="{Binding BeginX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                         Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         HorizontalAlignment="Left" Height="23" Margin="356,62,0,0" 
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                <Label x:Name="Label_X0" Content="Начальная координата по оси X" 
+                       Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                       HorizontalAlignment="Left" Margin="164,61,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="TB_Y0" 
+                         Text="{Binding BeginY,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                         Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         HorizontalAlignment="Left" Height="23" Margin="356,93,0,0" 
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                <Label x:Name="Label_Y0" Content="Начальная координата по оси Y" 
+                       Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                       HorizontalAlignment="Left" Margin="164,92,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="TB_XEnd" 
+                         Text="{Binding EndX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" Height="23" 
+                         Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         Margin="356,124,0,0" TextWrapping="Wrap" 
+                         VerticalAlignment="Top" Width="70"/>
+                <Label x:Name="Label_XEnd" Content="Конечная координата по оси Х" 
+                       Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                       HorizontalAlignment="Left" Margin="170,123,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="TB_YEnd" 
+                         Text="{Binding EndY,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
+                         HorizontalAlignment="Left" Height="23" 
+                         Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         Margin="356,155,0,0" TextWrapping="Wrap" 
+                         VerticalAlignment="Top" Width="70"/>
+                <Label x:Name="Label_YEnd" Content="Конечная координата по оси Y" 
+                       Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                       HorizontalAlignment="Left" Margin="170,155,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="TB_Width" 
+                         Text="{Binding Width,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                         Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         HorizontalAlignment="Left" Height="23"  Margin="356,186,0,0" 
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                <Label x:Name="Label_Width" Content="Ширина прорези" 
+                       Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                       HorizontalAlignment="Left" Margin="246,185,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="TB_LengthStep" 
+                         Text="{Binding LengthStep,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                         Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         HorizontalAlignment="Left" Height="23" Margin="356,217,0,0" 
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                <Label x:Name="LabelLengthStep" Content="Длина шага" 
+                       Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}"  
+                       HorizontalAlignment="Left" Margin="277,216,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="Btn_Accept" Content="Применить" 
+                        Command="{Binding clickBtn_Accept}" 
+                        Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" 
+                        Canvas.Left="351" Canvas.Top="298"/>
+                <Button x:Name="Btn_Stop" Content="Стоп" 
+                        Command="{Binding clickBtn_Stop}" 
+                        Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" 
+                        Canvas.Left="246" Canvas.Top="298"/>
+                <Button x:Name="Btn_Up" IsEnabled="False" 
+                        Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}"   
+                        Content="Вверх" HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" Width="45" Height="40" Canvas.Left="63" Canvas.Top="231"/>
+                <Button x:Name="Btn_Down" IsEnabled="False" 
+                        Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                        Content="Вниз" HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" Width="45" Height="40" Canvas.Left="63" Canvas.Top="278"/>
+                <Button x:Name="Btn_Right" IsEnabled="False" 
+                        Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                        Content="Вправо" HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" Width="45" Height="40" Canvas.Left="113" Canvas.Top="253"/>
+                <Button x:Name="Btn_Left" IsEnabled="False" 
+                        Visibility="{Binding VisibilityMoveButons,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                        Content="Влево" HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" Width="45" Height="40" Canvas.Left="13" Canvas.Top="253"/>
+                <Label Name="Label_Move" 
+                       Content="{Binding MoveString, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                       Canvas.Left="18" Canvas.Top="195"/>
+                <TextBox x:Name="TB_Speed" 
+                    Text="{Binding Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    Visibility="{Binding VisibilityStrings, Converter={StaticResource BoolToVisConverter}, UpdateSourceTrigger=PropertyChanged}" 
+                    HorizontalAlignment="Left" Height="23" 
+                    TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Canvas.Left="356" Canvas.Top="250"/>
+                <Label x:Name="LabelSpeed" Content="Скорость" 
+                    Visibility="{Binding VisibilityStrings, Converter={StaticResource BoolToVisConverter}, UpdateSourceTrigger=PropertyChanged}"  
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="290" Canvas.Top="249"/>
             </Canvas>
         </Viewbox>
     </Grid>
