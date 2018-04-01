@@ -62,7 +62,7 @@ namespace Strogach.Network
                     _exchangeContext.YCoordinate,
                     _exchangeContext.BrickLength,
                     _exchangeContext.BrickWidth
-                    )
+                    );
             }
             else if (frame.Command == ECommands.Auto)
             {
@@ -148,21 +148,25 @@ namespace Strogach.Network
         // Устанавливает координаты для контекста из данных.
         private void SetCoordinatesFromData(byte[] data)
         {
-            _exchangeContext.XCoordinate = BitConverter.ToSingle(data, 0);
-            _exchangeContext.YCoordinate = BitConverter.ToSingle(data, 4);
+                float[] getParam = new float[5];
+                getParam[1] = (_exchangeContext.XCoordinate = BitConverter.ToSingle(data, 0));
+                getParam[2] = (_exchangeContext.YCoordinate = BitConverter.ToSingle(data, 4));
 
-            _exchangeContext.newXCoordinate = BitConverter.ToSingle(data, 8);
-            _exchangeContext.newYCoordinate = BitConverter.ToSingle(data, 12);
+                getParam[3] = (_exchangeContext.newXCoordinate = BitConverter.ToSingle(data, 8));
+                getParam[4] = (_exchangeContext.newYCoordinate = BitConverter.ToSingle(data, 12));
 
-            _exchangeContext.CutWidth = BitConverter.ToSingle(data, 16);
+                getParam[5] = (_exchangeContext.CutWidth = BitConverter.ToSingle(data, 16));
+                _exchangeContext.GetCoordinatesFromData(getParam);
         }
 
         // Устанавлявает координаты для ручного прохода по бруску.
         private void SetManualStepper(byte[] data)
         {
-            _exchangeContext.Direction = (EDirection)data[0];
-            _exchangeContext.CutStep = BitConverter.ToSingle(data, 1);
-            _exchangeContext.CutWidth = BitConverter.ToSingle(data, 5);
+            float[] getParam = new float[3];
+            getParam[1] = (float)(_exchangeContext.Direction = (EDirection)data[0]);
+            getParam[2] = (_exchangeContext.CutStep = BitConverter.ToSingle(data, 1));
+            getParam[3] = (_exchangeContext.CutWidth = BitConverter.ToSingle(data, 5));
+            _exchangeContext.GetCoordinatesFromData(getParam);
         }
     }
 }
