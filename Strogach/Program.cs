@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Strogach.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace Strogach
     {
         static void Main(string[] args)
         {
+            GenECommands commands = new GenECommands();
+            
         }
     }
 }

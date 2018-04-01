@@ -91,6 +91,7 @@ namespace ExchangeChannel.Network
             while (true)
             {
                 byte[] message = GetMessage();
+                Console.WriteLine("Передача сообщения от клиента " + NetClient.Client.LocalEndPoint);
                 _server.Send(message, this);
             }
 

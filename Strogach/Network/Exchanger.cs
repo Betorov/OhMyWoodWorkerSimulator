@@ -1,5 +1,6 @@
 ﻿using Strogach.Context;
 using System;
+using ExchangeChannel.Network;
 
 namespace Strogach.Network
 {
@@ -11,7 +12,12 @@ namespace Strogach.Network
         //
         // Приватные переменные.
         //
-
+        private enum EModeState
+        {
+            auto = 1,
+            manual = 2,
+            stop = 3
+        }
         // Канал для обмена данными с пультом управления.
         private StrogachChannel _exchangeChannel;
 
@@ -47,12 +53,12 @@ namespace Strogach.Network
                     ExchangeContext.XCoordinate,
                     ExchangeContext.YCoordinate,
                     ExchangeContext.BrickLength,
-                    ExchangeContext.BrickWidth);
+                    ExchangeContext.BrickWidth
+                    );
             }
             else if (frame.Command == ECommands.Auto)
             {
                 SetCoordinatesFromData(frame.Data);
-                // TODO: Notify system to start cut
             }
             else if (frame.Command == ECommands.Manual)
             {
@@ -133,11 +139,11 @@ namespace Strogach.Network
         {
             ExchangeContext.XCoordinate = BitConverter.ToSingle(data, 0);
             ExchangeContext.YCoordinate = BitConverter.ToSingle(data, 4);
-
-            ExchangeContext.newXCoordinate = BitConverter.ToSingle(data, 8);
-            ExchangeContext.newYCoordinate = BitConverter.ToSingle(data, 12);
+            ExchangeContext.NewXCoordinate = BitConverter.ToSingle(data, 8);
+            ExchangeContext.NewYCoordinate = BitConverter.ToSingle(data, 12);
 
             ExchangeContext.CutWidth = BitConverter.ToSingle(data, 16);
+            ExchangeContext.Speed = BitConverter.ToSingle(data, 20);
         }
 
         // Устанавлявает координаты для ручного прохода по бруску.

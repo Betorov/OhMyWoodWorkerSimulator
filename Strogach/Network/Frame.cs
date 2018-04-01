@@ -38,6 +38,8 @@ namespace Strogach.Network
             Data =
                 new byte[request.Length - 1];
 
+            Command = (ECommands)request[0];
+
             Array.Copy(
                 request,
                 1,
