@@ -35,19 +35,19 @@
                        Canvas.Left="201" Canvas.Top="10"/>
                 <TextBox x:Name="TB_X0" 
                          Text="{Binding BeginX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                         Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                          HorizontalAlignment="Left" Height="23" Margin="356,62,0,0" 
                          TextWrapping="NoWrap" VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="Label_X0" Content="Начальная координата по оси X" 
-                       Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                       Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                        HorizontalAlignment="Left" Margin="164,61,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="TB_Y0" 
                          Text="{Binding BeginY,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                         Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                          HorizontalAlignment="Left" Height="23" Margin="356,93,0,0" 
                          TextWrapping="NoWrap" VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="Label_Y0" Content="Начальная координата по оси Y" 
-                       Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                       Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                        HorizontalAlignment="Left" Margin="164,92,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="TB_XEnd" 
                          Text="{Binding EndX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
@@ -77,11 +77,11 @@
                        HorizontalAlignment="Left" Margin="246,185,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="TB_LengthStep" 
                          Text="{Binding LengthStep,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                         Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
+                         Visibility="{Binding VisibilityLength,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                          HorizontalAlignment="Left" Height="23" Margin="356,217,0,0" 
                          TextWrapping="NoWrap" VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="LabelLengthStep" Content="Длина шага" 
-                       Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}"  
+                       Visibility="{Binding VisibilityLength,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}"  
                        HorizontalAlignment="Left" Margin="277,216,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="Btn_Accept" Content="Применить" 
                         Command="{Binding clickBtn_Accept}" 
