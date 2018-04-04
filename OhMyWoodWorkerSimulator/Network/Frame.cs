@@ -156,7 +156,7 @@ namespace OhMyWoodWorkerSimulator.Network
         private void EnsureResultCode(byte answer)
         {
             if (answer != (byte)EErrors.Ok)
-                throw new Exception("Ошибка ответа.");
+                throw new Exception("Ошибка ответа." + (EErrors)answer);
         }
     }
 }

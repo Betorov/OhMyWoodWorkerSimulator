@@ -54,8 +54,9 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                 {
                     var exchangeChannel = new ExchangeChannel.Network.Channel();
                     IPAddress iPAddress = IPAddress.Parse("127.0.0.1");
+                    //IPAddress iPAddress = IPAddress.Parse("89.179.187.119");
 
-                    exchangeChannel.ConnectToServer(IPAddress.Parse("89.179.187.119"), 25565);
+                    exchangeChannel.ConnectToServer(iPAddress, 25565);
                     MyExchanger = new Exchanger(exchangeChannel);
                     //MyExchanger.SendHandshakeRequestAsync();
                     IsConnected = true;

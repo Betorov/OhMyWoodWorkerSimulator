@@ -1,4 +1,4 @@
-﻿using Strogach.Context;
+﻿using Assets.Code.MoveLogic;
 using Strogach.Network;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,12 @@ namespace Assets.Code
 
     public class PlaneMove : MonoBehaviour
     {
+        private PlaneLogic _planeLogic;
+
+        //
+        //
+        //
+
         // Список точек краев бруска
         private Vector3[] points;
         // Now point
@@ -28,9 +34,6 @@ namespace Assets.Code
         
         // Нож
         public Collider knifeCollider;
-
-        //Скорость ножа
-        public float speed = 1.0f;
 
         // Внешние и внутреннии меши бруска
         public MeshFilter meshOutside, meshInside;
@@ -50,33 +53,49 @@ namespace Assets.Code
         public GameObject wood;
 
         Exchanger _exchanger;
+        
 
-        public void Start()
+        public void Awake()
         {
-           
             BlockSize = wood.transform.localScale;
 
             meshOutside.transform.localScale = BlockSize;
             meshInside.transform.localScale = BlockSize * (1.0f - DeltaSize);
 
-            
+
             MeshHelper.Subdivide(meshOutside.mesh, SubdivideLevel);
-            MeshHelper.Subdivide(meshInside.mesh, SubdivideLevel);         
+            MeshHelper.Subdivide(meshInside.mesh, SubdivideLevel);
 
             verticesOrigin = meshOutside.mesh.vertices;
             verticesOutside = verticesOrigin;
             verticesInside = meshInside.mesh.vertices;
 
+            // Create moving logic
+            _planeLogic = new PlaneLogic(
+                plane.transform.position,
+                wood.transform.localScale.x,
+                wood.transform.localScale.z);
         }
 
-       
+        public void Start()
+        {          
+            
+        }   
 
         public void Update()
         {
 
             //Двигаем нож
-            //plane.transform.position = Vector3.MoveTowards(transform.position, vectorNow, speed);
+            plane.transform.position = Vector3.MoveTowards(
+                transform.position,
+                _planeLogic.nextPointPlane(transform.position), 
+                _planeLogic.Speed);
 
+            updateInteraction();
+        }
+
+        public void updateInteraction()
+        {
             var knifeBounds = Extensions.InverseTransformBounds(meshInside.transform, knifeCollider.bounds);
             var knifeBottom = meshInside.
                 transform.
@@ -115,36 +134,13 @@ namespace Assets.Code
             });
 
             // Обновляем картину если что-то поменялось
-            if(changed)
+            if (changed)
             {
                 meshInside.mesh.vertices = verticesInside;
                 meshOutside.mesh.vertices = verticesOutside;
-            }          
+            }
         }
+        
 
-        private void UppdateData()
-        {
-
-        }
-        private void initServer()
-        {
-            var contextData = new ContextExchanger();
-            contextData.eventHandler += UpdateData;
-
-            var exchangeChannel = new Strogach.Network.StrogachChannel(contextData);
-            IPAddress iPAddress = IPAddress.Parse("89.179.187.119");
-
-            exchangeChannel.ConnectToServer(iPAddress, 25565);
-
-            _exchanger = new Exchanger(exchangeChannel);
-
-            _exchanger.SendOk();
-        }
-
-        private void UpdateData(object sender, EventArgs e)
-        {
-            /// Update data in this
-            Debug.Log("Receive");
-        }
     }
 }

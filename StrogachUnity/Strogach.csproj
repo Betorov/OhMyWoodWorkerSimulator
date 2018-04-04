@@ -317,11 +317,12 @@
   <ItemGroup>
     <Compile Include="Assets\Code\ContextExchanger.cs" />
     <Compile Include="Assets\Code\Extensions.cs" />
+    <Compile Include="Assets\Code\MoveLogic\ExchangeContext.cs" />
+    <Compile Include="Assets\Code\MoveLogic\PlaneLogic.cs" />
     <Compile Include="Assets\Code\Network\Channel.cs" />
     <Compile Include="Assets\Code\Network\ECommands.cs" />
     <Compile Include="Assets\Code\Network\EDirection.cs" />
     <Compile Include="Assets\Code\Network\EErrors.cs" />
-    <Compile Include="Assets\Code\Network\ExchangeContext.cs" />
     <Compile Include="Assets\Code\Network\Exchanger.cs" />
     <Compile Include="Assets\Code\Network\Frame.cs" />
     <Compile Include="Assets\Code\Network\StrogachChannel.cs" />

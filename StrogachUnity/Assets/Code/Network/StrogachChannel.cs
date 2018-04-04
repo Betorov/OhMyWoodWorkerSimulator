@@ -15,16 +15,15 @@ namespace Strogach.Network
     /// </summary>
     public class StrogachChannel : Channel
     {
-        private ContextExchanger _context;
 
         //
         // Публичные переменные.
         //
 
 
-        public StrogachChannel(ContextExchanger context)
+        public StrogachChannel()
         {
-            _context = context;
+            
         }
 
         /// <summary>
@@ -54,14 +53,6 @@ namespace Strogach.Network
             Thread thread = new Thread(RunListenerTask);
 
             thread.Start();
-        }
-
-        public ContextExchanger Context
-        {
-            get
-            {
-                return _context;
-            }
         }
 
         //

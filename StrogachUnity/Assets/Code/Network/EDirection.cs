@@ -5,6 +5,13 @@ using System.Text;
 
 namespace Strogach.Network
 {
+    public enum EState
+    {
+        AutoMove,
+        ManualMove,
+        Stop
+    }
+
     /// <summary>
     /// Перечисление доступных направлений прохода ножа в ручном режиме.
     /// </summary>

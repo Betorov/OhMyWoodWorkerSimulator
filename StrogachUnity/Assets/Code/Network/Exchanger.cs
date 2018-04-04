@@ -1,5 +1,6 @@
-﻿using Strogach.Context;
+﻿using Assets.Code.MoveLogic;
 using System;
+using UnityEngine;
 
 namespace Strogach.Network
 {
@@ -34,6 +35,8 @@ namespace Strogach.Network
         /// <param name="request">Запрос к станку.</param>
         public void React(byte[] request)
         {
+            Debug.Log("Что-то пришло от контроллера" + request[0]);
+
             Frame frame = new Frame();
             frame.FillSelfFromRequest(request);
 
@@ -134,8 +137,8 @@ namespace Strogach.Network
             ExchangeContext.XCoordinate = BitConverter.ToSingle(data, 0);
             ExchangeContext.YCoordinate = BitConverter.ToSingle(data, 4);
 
-            ExchangeContext.newXCoordinate = BitConverter.ToSingle(data, 8);
-            ExchangeContext.newYCoordinate = BitConverter.ToSingle(data, 12);
+            ExchangeContext.NewXCoordinate = BitConverter.ToSingle(data, 8);
+            ExchangeContext.NewYCoordinate = BitConverter.ToSingle(data, 12);
 
             ExchangeContext.CutWidth = BitConverter.ToSingle(data, 16);
         }
@@ -143,8 +146,6 @@ namespace Strogach.Network
         // Устанавлявает координаты для ручного прохода по бруску.
         private void SetManualStepper(byte[] data)
         {
-            _exchangeChannel.Context.setDCC( (float) ((EDirection)data[0]), BitConverter.ToSingle(data, 1), BitConverter.ToSingle(data, 5));
-
             ExchangeContext.Direction = (EDirection)data[0];
             ExchangeContext.CutStep = BitConverter.ToSingle(data, 1);
             ExchangeContext.CutWidth = BitConverter.ToSingle(data, 5);
