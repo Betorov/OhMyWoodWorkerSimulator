@@ -51,11 +51,14 @@ namespace Assets.Code
         //
         public GameObject plane;
         public GameObject wood;
-
-        Exchanger _exchanger;
         
 
         public void Awake()
+        {
+            
+        }
+
+        public void Start()
         {
             BlockSize = wood.transform.localScale;
 
@@ -75,15 +78,13 @@ namespace Assets.Code
                 plane.transform.position,
                 wood.transform.localScale.x,
                 wood.transform.localScale.z);
-        }
-
-        public void Start()
-        {          
-            
         }   
 
         public void Update()
         {
+
+            if (ExchangeContext.CutWidth != 0)
+                Debug.Log(ExchangeContext.CutWidth);
 
             //Двигаем нож
             plane.transform.position = Vector3.MoveTowards(

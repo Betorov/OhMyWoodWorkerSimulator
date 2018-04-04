@@ -127,8 +127,8 @@ namespace OhMyWoodWorkerSimulator.Network
             //else if (answer[0] != (byte)_currentCommand)
                 //throw new Exception("Неправильный ответ на команду.");
 
-            //Data = new byte[answer.Length - 1];
-            //Array.Copy(answer, 1, Data, 0, Data.Length);
+            Data = new byte[answer.Length - 1];
+            Array.Copy(answer, 1, Data, 0, Data.Length);
         }
 
         //

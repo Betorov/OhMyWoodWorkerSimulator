@@ -31,12 +31,21 @@ namespace Assets.Code.MoveLogic
             ExchangeContext.XCoordinate = vectorPlaneNow.x;
             ExchangeContext.YCoordinate = vectorPlaneNow.y;
 
-            _exchanger.SendParams(vectorPlaneNow.x, vectorPlaneNow.z, brickLength, brickWidht);
-            
+            _exchanger.SendParams(vectorPlaneNow.x, vectorPlaneNow.z, brickLength, brickWidht);        
         }
 
+        //TODO: Logic Moving Plane
         public Vector3 nextPointPlane(Vector3 vectorPlaneNow)
         {
+            if (!ExchangeContext.hasRunning)
+                return vectorPlaneNow;
+
+            if (ExchangeContext.hasManualRunning)
+                return nextManualPoint(vectorPlaneNow);
+
+            if (ExchangeContext.hasAutoRunning)
+                return nextAutoPoint(vectorPlaneNow);
+
             //Debug.Log(ExchangeContext.BrickLength);
            // Debug.Log(ExchangeContext.Speed);
 
@@ -58,7 +67,15 @@ namespace Assets.Code.MoveLogic
             }
         }
 
+        private Vector3 nextManualPoint(Vector3 vector)
+        {
+            return new Vector3(0,0,0);
+        }
 
-        
+        private Vector3 nextAutoPoint(Vector3 vector)
+        {
+            return new Vector3(0, 0, 0);
+        }
+
     }
 }

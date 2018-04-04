@@ -35,10 +35,11 @@ namespace Strogach.Network
         /// <param name="request">Запрос к станку.</param>
         public void React(byte[] request)
         {
-            Debug.Log("Что-то пришло от контроллера" + request[0]);
 
             Frame frame = new Frame();
             frame.FillSelfFromRequest(request);
+
+            Debug.Log(frame.Command);
 
             if (frame.Command == ECommands.Handshake)
             {
@@ -54,16 +55,23 @@ namespace Strogach.Network
             }
             else if (frame.Command == ECommands.Auto)
             {
+                ExchangeContext.hasManualRunning = false;
+                ExchangeContext.hasAutoRunning = true;
+
                 SetCoordinatesFromData(frame.Data);
                 // TODO: Notify system to start cut
             }
             else if (frame.Command == ECommands.Manual)
             {
+                ExchangeContext.hasManualRunning = true;
+                ExchangeContext.hasAutoRunning = false;
+
                 SetManualStepper(frame.Data);
                 // TODO: Notify system to go with some step
             }
             else if (frame.Command == ECommands.Stop)
             {
+                ExchangeContext.hasRunning = false;
                 // TODO: NOtify system to stop auto cut.
             }
         }
@@ -134,6 +142,7 @@ namespace Strogach.Network
         // Устанавливает координаты для контекста из данных.
         private void SetCoordinatesFromData(byte[] data)
         {
+
             ExchangeContext.XCoordinate = BitConverter.ToSingle(data, 0);
             ExchangeContext.YCoordinate = BitConverter.ToSingle(data, 4);
 

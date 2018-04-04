@@ -37,7 +37,7 @@
                          Text="{Binding BeginX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                          Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                          HorizontalAlignment="Left" Height="23" Margin="356,62,0,0" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                         TextWrapping="NoWrap" VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="Label_X0" Content="Начальная координата по оси X" 
                        Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                        HorizontalAlignment="Left" Margin="164,61,0,0" VerticalAlignment="Top"/>
@@ -45,7 +45,7 @@
                          Text="{Binding BeginY,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                          Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                          HorizontalAlignment="Left" Height="23" Margin="356,93,0,0" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                         TextWrapping="NoWrap" VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="Label_Y0" Content="Начальная координата по оси Y" 
                        Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                        HorizontalAlignment="Left" Margin="164,92,0,0" VerticalAlignment="Top"/>
@@ -53,7 +53,7 @@
                          Text="{Binding EndX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                          HorizontalAlignment="Left" Height="23" 
                          Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
-                         Margin="356,124,0,0" TextWrapping="Wrap" 
+                         Margin="356,124,0,0" TextWrapping="NoWrap" 
                          VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="Label_XEnd" Content="Конечная координата по оси Х" 
                        Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
@@ -62,7 +62,7 @@
                          Text="{Binding EndY,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
                          HorizontalAlignment="Left" Height="23" 
                          Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
-                         Margin="356,155,0,0" TextWrapping="Wrap" 
+                         Margin="356,155,0,0" TextWrapping="NoWrap" 
                          VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="Label_YEnd" Content="Конечная координата по оси Y" 
                        Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
@@ -71,7 +71,7 @@
                          Text="{Binding Width,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                          Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                          HorizontalAlignment="Left" Height="23"  Margin="356,186,0,0" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                         TextWrapping="NoWrap" VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="Label_Width" Content="Ширина прорези" 
                        Visibility="{Binding VisibilityOtherComponents,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                        HorizontalAlignment="Left" Margin="246,185,0,0" VerticalAlignment="Top"/>
@@ -79,7 +79,7 @@
                          Text="{Binding LengthStep,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                          Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}" 
                          HorizontalAlignment="Left" Height="23" Margin="356,217,0,0" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                         TextWrapping="NoWrap" VerticalAlignment="Top" Width="70"/>
                 <Label x:Name="LabelLengthStep" Content="Длина шага" 
                        Visibility="{Binding VisibilityStrings,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BoolToVisConverter}}"  
                        HorizontalAlignment="Left" Margin="277,216,0,0" VerticalAlignment="Top"/>
@@ -116,7 +116,7 @@
                     Text="{Binding Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                     Visibility="{Binding VisibilityStrings, Converter={StaticResource BoolToVisConverter}, UpdateSourceTrigger=PropertyChanged}" 
                     HorizontalAlignment="Left" Height="23" 
-                    TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Canvas.Left="356" Canvas.Top="250"/>
+                    TextWrapping="NoWrap" VerticalAlignment="Top" Width="70" Canvas.Left="356" Canvas.Top="250"/>
                 <Label x:Name="LabelSpeed" Content="Скорость" 
                     Visibility="{Binding VisibilityStrings, Converter={StaticResource BoolToVisConverter}, UpdateSourceTrigger=PropertyChanged}"  
                     HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="290" Canvas.Top="249"/>

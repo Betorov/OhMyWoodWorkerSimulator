@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using UnityEngine;
 
 namespace Strogach.Network
 {
@@ -62,21 +63,22 @@ namespace Strogach.Network
         // Слушатель входящих от пульта сообщений.
         private void RunListenerTask()
         {
-
-
-            Data = new byte[64];
-
-            do
+            while (true)
             {
-                _stream.Read(
-                    Data,
-                    0,
-                    Data.Length);
-            }
-            while (_stream.DataAvailable);
+                Data = new byte[64];
 
-            var exchanger = new Exchanger(this);
-            exchanger.React(Data);
+                do
+                {
+                    _stream.Read(
+                        Data,
+                        0,
+                        Data.Length);
+                }
+                while (_stream.DataAvailable);
+
+                var exchanger = new Exchanger(this);
+                exchanger.React(Data);
+            }
         }
     }
 }
