@@ -111,23 +111,35 @@ namespace ExchangeChannel.Network
             byte[] message,
             Client sender)
         {
-            Client receiver = sender.BoundedClient;
-
-            Console.WriteLine("Пересылка: ");
-
-            foreach(var datum in message)
+            try
             {
-                Console.Write(
-                    "0x" +
-                    datum.ToString("X") + 
-                    " ");
-            }
-            Console.WriteLine();
+                Client receiver = sender.BoundedClient;
 
-            receiver.Stream.Write(
-                message,
-                0,
-                message.Length);
+                Console.WriteLine("Пересылка: ");
+
+                foreach (var datum in message)
+                {
+                    Console.Write(
+                        "0x" +
+                        datum.ToString("X") +
+                        " ");
+                }
+                Console.WriteLine();
+
+                receiver.Stream.Write(
+                    message,
+                    0,
+                    message.Length);
+            }
+            catch
+            {
+                Console.WriteLine("Соединение между клиентами разорвано.");
+                this.RemoveConnection(sender.Id);
+                this.RemoveConnection(sender.BoundedClient.Id);
+                sender.BoundedClient.Close();
+                sender.Close();
+            }
+            
         }
 
         /// <summary>
