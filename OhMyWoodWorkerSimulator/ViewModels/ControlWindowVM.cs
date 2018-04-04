@@ -189,9 +189,10 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     {
                         tempBrick = MyExchanger.GetBrickParams();
                     }
-
-                    MyHacsaw.X0 = tempBrick.X;
-                    MyHacsaw.Y0 = tempBrick.Y;
+                    BeginX = tempBrick.X.ToString();
+                    BeginY = tempBrick.Y.ToString();
+                    //MyHacsaw.X0 = tempBrick.X;
+                    //MyHacsaw.Y0 = tempBrick.Y;
                 }));
             }
         }
