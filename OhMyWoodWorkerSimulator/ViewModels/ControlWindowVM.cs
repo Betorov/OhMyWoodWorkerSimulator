@@ -32,6 +32,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
         private bool _visibilityMoveBuutons = false;
         private bool _visibilityStrings = false;
         private bool _visibilityOtherComponents = false;
+        private bool _visibilityLength = false;
         private bool _isAutoMode = false;
         private bool _isHandMode = false;
         private bool _isWork = false;
@@ -99,6 +100,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     VisibilityMoveButons = false;
                     VisibilityStrings = true;
                     VisibilityOtherComponents = true;
+                    VisibilityLength = false;
                 }));
             }
         }
@@ -120,6 +122,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     VisibilityMoveButons = true;
                     VisibilityStrings = false;
                     VisibilityOtherComponents = true;
+                    VisibilityLength = true;
                 }));
             }
         }
@@ -135,7 +138,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                 {
                     if(IsAutoMode)
                     {
-                        if (LengthStep != String.Empty &&
+                        if (
                         Width != String.Empty &&
                         BeginX != String.Empty &&
                         BeginY != String.Empty &&
@@ -156,8 +159,7 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     {
                         if (
                         Width != String.Empty &&
-                        BeginX != String.Empty &&
-                        BeginY != String.Empty 
+                        LengthStep != String.Empty                         
                         )
                         {
                             //MessageBox.Show("Got it!");
@@ -192,8 +194,6 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                     }
                     BeginX = tempBrick.X.ToString();
                     BeginY = tempBrick.Y.ToString();
-                    //MyHacsaw.X0 = tempBrick.X;
-                    //MyHacsaw.Y0 = tempBrick.Y;
                 }));
             }
         }
@@ -471,5 +471,9 @@ namespace OhMyWoodWorkerSimulator.ViewModels
                 OnPropertyChanged("MoveString");
             }
         }
+        /// <summary>
+        /// Отоборажение длинны шага
+        /// </summary>
+        public bool VisibilityLength { get => _visibilityLength; set { _visibilityLength = value; OnPropertyChanged("VisibilityLength"); } }
     }
 }

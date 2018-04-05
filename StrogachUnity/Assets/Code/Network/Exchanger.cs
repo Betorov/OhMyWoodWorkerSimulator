@@ -37,9 +37,7 @@ namespace Strogach.Network
         {
 
             Frame frame = new Frame();
-            frame.FillSelfFromRequest(request);
-
-            Debug.Log(frame.Command);
+            frame.FillSelfFromRequest(request);       
 
             if (frame.Command == ECommands.Handshake)
             {
@@ -57,6 +55,7 @@ namespace Strogach.Network
             {
                 ExchangeContext.hasManualRunning = false;
                 ExchangeContext.hasAutoRunning = true;
+                ExchangeContext.hasRunning = true;
 
                 SetCoordinatesFromData(frame.Data);
                 // TODO: Notify system to start cut
@@ -65,12 +64,15 @@ namespace Strogach.Network
             {
                 ExchangeContext.hasManualRunning = true;
                 ExchangeContext.hasAutoRunning = false;
+                ExchangeContext.hasRunning = true;
 
                 SetManualStepper(frame.Data);
                 // TODO: Notify system to go with some step
             }
             else if (frame.Command == ECommands.Stop)
             {
+                ExchangeContext.hasManualRunning = false;
+                ExchangeContext.hasAutoRunning = false;
                 ExchangeContext.hasRunning = false;
                 // TODO: NOtify system to stop auto cut.
             }
@@ -150,6 +152,8 @@ namespace Strogach.Network
             ExchangeContext.NewYCoordinate = BitConverter.ToSingle(data, 12);
 
             ExchangeContext.CutWidth = BitConverter.ToSingle(data, 16);
+
+            ExchangeContext.Speed = BitConverter.ToSingle(data, 20);
         }
 
         // Устанавлявает координаты для ручного прохода по бруску.

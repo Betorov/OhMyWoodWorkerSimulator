@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Code
 {
@@ -39,8 +40,9 @@ namespace Assets.Code
         public MeshFilter meshOutside, meshInside;
         public Material material;
 
+        public Text coordinatText;
 
-        public int SubdivideLevel = 50;
+        public int SubdivideLevel = 64;// 50
     
         // массивы вершин
         private Vector3[] verticesOrigin, verticesOutside, verticesInside;
@@ -65,14 +67,15 @@ namespace Assets.Code
             meshOutside.transform.localScale = BlockSize;
             meshInside.transform.localScale = BlockSize * (1.0f - DeltaSize);
 
-
             MeshHelper.Subdivide(meshOutside.mesh, SubdivideLevel);
             MeshHelper.Subdivide(meshInside.mesh, SubdivideLevel);
 
             verticesOrigin = meshOutside.mesh.vertices;
             verticesOutside = verticesOrigin;
             verticesInside = meshInside.mesh.vertices;
+            
 
+            ExchangeContext.Speed = 35.0f;
             // Create moving logic
             _planeLogic = new PlaneLogic(
                 plane.transform.position,
@@ -83,14 +86,27 @@ namespace Assets.Code
         public void Update()
         {
 
-            if (ExchangeContext.CutWidth != 0)
-                Debug.Log(ExchangeContext.CutWidth);
+            var vector = plane.transform.position;
 
+            vector.x += 1f;
+            vector.y -= 1f;
+
+            coordinatText.text = 
+                "Coordinate plane Now X: " + 
+                plane.transform.position.x + 
+                " And Y: " + 
+                plane.transform.position.z;
+
+            // _planeLogic.nextPointPlaneFor(plane);
+            //plane.transform.position = _planeLogic.nextPointPlane(plane.transform.position);
             //Двигаем нож
+
+            Debug.Log(ExchangeContext.Speed);
             plane.transform.position = Vector3.MoveTowards(
                 transform.position,
-                _planeLogic.nextPointPlane(transform.position), 
-                _planeLogic.Speed);
+                //vector,
+                _planeLogic.nextPointPlane(transform.position, plane, wood), 
+                ExchangeContext.Speed * Time.deltaTime);
 
             updateInteraction();
         }
