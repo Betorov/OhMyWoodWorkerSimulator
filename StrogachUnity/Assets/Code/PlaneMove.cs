@@ -100,8 +100,7 @@ namespace Assets.Code
             // _planeLogic.nextPointPlaneFor(plane);
             //plane.transform.position = _planeLogic.nextPointPlane(plane.transform.position);
             //Двигаем нож
-
-            Debug.Log(ExchangeContext.Speed);
+           
             plane.transform.position = Vector3.MoveTowards(
                 transform.position,
                 //vector,

@@ -130,10 +130,17 @@ namespace Assets.Code.MoveLogic
 
         private Vector3 nextAutoPoint(Vector3 vector, GameObject plane, GameObject wood)
         {
+
+
             if (ExchangeContext.CutWidth != 0)
             {
-                vector.y = vector.y - ExchangeContext.CutWidth;
+                Debug.Log(ExchangeContext.CutWidth);
+
+                var vectorNew = vector;
+                vectorNew.y = (vectorNew.y - ExchangeContext.CutWidth);
                 ExchangeContext.CutWidth = 0;
+                return vectorNew;
+                
             }
 
             Vector3 newVector = new Vector3(ExchangeContext.NewXCoordinate, vector.y, ExchangeContext.NewYCoordinate);
